@@ -5,14 +5,9 @@
 Setting permission on /tmp/xfusioncorp.sh 
 
 
-
-
-The file /tmp/xfusioncorp.sh has no permissions set for any user (owner, group, or others), as indicated by the permission bits ----------. This means even the root user cannot execute, read, or write to it directly through normal means. 
-However, since you are root (as shown by the ownership root root), you can change the permissions to make it usable.
-
-
 ## First Read the permision of the file 
 
+<img width="688" height="90" alt="image" src="https://github.com/user-attachments/assets/87af953c-ee26-44e2-a96f-9ad3e6548b99" />
 
 The file /tmp/xfusioncorp.sh has no permissions set for any user (owner, group, or others), as indicated by the permission bits ----------. This means even the root user cannot execute, read, or write to it directly through normal means. 
 However, since you are root (as shown by the ownership root root), you can change the permissions to make it usable.
@@ -33,7 +28,8 @@ Group: read, execute (5)
 Others: read, execute (5)
 
 
-<img width="1277" height="708" alt="image" src="https://github.com/user-attachments/assets/cda5bccf-45e3-4e0c-be43-6c304b0e7f14" />
+<img width="712" height="315" alt="image" src="https://github.com/user-attachments/assets/f1148766-a161-44e2-92a6-a4b6f9c82306" />
+
 
 
 ## Verification Steps
