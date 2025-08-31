@@ -11,22 +11,23 @@ This process involves generating an SSH key pair for thor, copying the public ke
 ## Step-by-Step Solution
 
 
-### Step 1: Generate an SSH key pair for thor
+### Step 1: Generate an SSH key pair for thor without a passphrase and saves the private/public key to Key store of thor user.
 
 
 ```bash
 ssh-keygen -t rsa -N "" -f "$HOME/.ssh/id_rsa"
 ```
 
+<img width="1231" height="895" alt="image" src="https://github.com/user-attachments/assets/8e74e7da-6eba-478f-ab8b-73dfe4f48e2d" />
 
 
 ### Step 2: Copy the public key to the app server's sudo user:
 
-Use ssh-copy-id to copy thor's public key to tony's authorized_keys file
+Use ssh-copy-id to copy thor's public key to tony's authorized_keys file while bypassing host key verification prompts. 
 
 ```bash
 
-ssh-keygen -t rsa  ssh-copy-id -o StrictHostKeyChecking=no  tony@172.16.238.10
+ssh-copy-id -o StrictHostKeyChecking=no  tony@172.16.238.10
 
 ```
 
@@ -40,6 +41,9 @@ From the jump host, try SSHing as tony to the app server:
 ```bash
 ssh tony@172.16.238.10
 ```
+
+<img width="1532" height="453" alt="image" src="https://github.com/user-attachments/assets/0be84a3b-2657-4394-886d-a63d1a4cbe68" />
+
 
 Now, you should log in without a password prompt
 
