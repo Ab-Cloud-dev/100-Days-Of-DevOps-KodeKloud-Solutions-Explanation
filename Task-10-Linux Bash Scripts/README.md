@@ -21,7 +21,7 @@ e. Do not use sudo inside the script.
 
 
 
-#### Step 1: Creating SSh Key for passwordLess login to backup Server And Installing Zip
+#### Step 1: From Appserver01 Creating SSh Key for passwordLess login to backup Server And Installing Zip
 
 
 ```bash
@@ -45,6 +45,7 @@ zip -r /backup/xfusioncorp_news.zip /var/www/html/news
 
 scp /backup/xfusioncorp_news.zip clint@stbkp01:/backup
 ```
+<img width="1475" height="987" alt="image" src="https://github.com/user-attachments/assets/d3394c52-cc71-40a3-8142-af77301b33f0" />
 
 
 #### Step 3: Running the Script
@@ -52,3 +53,7 @@ scp /backup/xfusioncorp_news.zip clint@stbkp01:/backup
 ```bash
 sh /scripts/news_backup.sh 
 ```
+
+
+<img width="1606" height="200" alt="image" src="https://github.com/user-attachments/assets/41f26693-d7cd-4c07-951f-55c37c544e26" />
+
