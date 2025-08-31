@@ -1,4 +1,4 @@
-# Task 03: SELinux Management on App Server 2
+# Task 05: SELinux Management on App Server 2
 
 ## Objective
 1. Install the required SELinux packages on App Server 2
