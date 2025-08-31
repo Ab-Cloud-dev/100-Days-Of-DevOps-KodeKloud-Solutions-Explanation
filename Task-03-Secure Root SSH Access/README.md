@@ -54,6 +54,10 @@ grep -q "^PermitRootLogin" /etc/ssh/sshd_config || echo "PermitRootLogin no" >> 
 systemctl restart sshd
 ```
 
+<img width="1442" height="1125" alt="image" src="https://github.com/user-attachments/assets/0dd48c42-e06c-4ddf-9f80-75ad3bb00bc6" />
+
+
+
 ## Verification Steps
 
 After completing the configuration on all servers, verify that root login is disabled:
