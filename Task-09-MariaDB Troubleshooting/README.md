@@ -1,16 +1,11 @@
-<img width="1516" height="845" alt="image" src="https://github.com/user-attachments/assets/4d72b251-2fff-463f-8934-5f90e80bec71" /># Task 02: MariaDb Troubleshooting
+# Task 09: MariaDb Troubleshooting
 
 ## Objective
 
 Identifying and resloving the issues with the MariaDb
 
 
-
-
-
 ## Step-by-Step Solution
-
-
 
 #### Step 1: Verifying the Status 
 
