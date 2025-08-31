@@ -1,27 +1,29 @@
- Task: Create user 'yousuf' with non-interactive shell on App Server 3
-# From jump_host, connect to stapp03 (App Server 3)
+ #Task: Create user 'yousuf' with non-interactive shell on App Server 3
+ 
+## From jump_host, connect to stapp03 (App Server 3)
 
-# Step 1: SSH to App Server 3
+## Step 1: SSH to App Server 3
 ssh banner@stapp03.stratos.xfusioncorp.com
 
-# Step 2: Switch to root user (if needed for user creation)
+## Step 2: Switch to root user (if needed for user creation)
 sudo su -
 
-# Step 3: Create user 'yousuf' with non-interactive shell
-# Using /sbin/nologin as the non-interactive shell
+## Step 3: Create user 'yousuf' with non-interactive shell
+### Using /sbin/nologin as the non-interactive shell
 useradd -s /sbin/nologin yousuf
 
-# Step 4: Verify the user creation
-# Check if user exists in /etc/passwd
+## Step 4: Verify the user creation
+### Check if user exists in /etc/passwd
 grep yousuf /etc/passwd
 
-# Step 5: Verify the shell assignment
-# The output should show /sbin/nologin as the shell
+## Step 5: Verify the shell assignment
+### The output should show /sbin/nologin as the shell
 id yousuf
 
-# Alternative verification - check user details
+## Alternative verification - check user details
 getent passwd yousuf
 
+<img width="948" height="438" alt="image" src="https://github.com/user-attachments/assets/a5513407-15d6-4248-83ce-61eeeee18cb6" />
 
 # Key Points:
 
