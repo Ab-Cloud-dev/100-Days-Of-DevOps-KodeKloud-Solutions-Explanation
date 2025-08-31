@@ -1,32 +1,43 @@
- Task: Create user 'yousuf' with non-interactive shell on App Server 3
-# From jump_host, connect to stapp03 (App Server 3)
+ # Task: Create user 'yousuf' with non-interactive shell on App Server 3
+ 
+## Solution Steps
 
-# Step 1: SSH to App Server 3
+### Step 1: Connect to App Server 3
+From the jump_host, SSH to App Server 3:
+```bash
 ssh banner@stapp03.stratos.xfusioncorp.com
+```
 
-# Step 2: Switch to root user (if needed for user creation)
+
+### Step 2: Switch to Root Privileges
+```bash
 sudo su -
+```
 
-# Step 3: Create user 'yousuf' with non-interactive shell
-# Using /sbin/nologin as the non-interactive shell
+### Step 3: Create User with Non-Interactive Shell
+Create the user `yousuf` with `/sbin/nologin` as the shell:
+```bash
 useradd -s /sbin/nologin yousuf
+```
 
-# Step 4: Verify the user creation
-# Check if user exists in /etc/passwd
+### Step 4: Verify User Creation
+Check if the user was created successfully:
+```bash
 grep yousuf /etc/passwd
-
-# Step 5: Verify the shell assignment
-# The output should show /sbin/nologin as the shell
-id yousuf
-
-# Alternative verification - check user details
-getent passwd yousuf
+```
 
 
-# Key Points:
+<img width="948" height="438" alt="image" src="https://github.com/user-attachments/assets/a5513407-15d6-4248-83ce-61eeeee18cb6" />
 
-- The -s /sbin/nologin option assigns a non-interactive shell to the user
-- /sbin/nologin prevents the user from logging in interactively while still allowing the account to exist for system processes
-- This is commonly used for service accounts and backup agents that need to exist but shouldn't have shell access
+## Key Points
 
-- The user yousuf is now created with a non-interactive shell as requested for the backup agent tool specifications.RetryClaude can make mistakes. Please double-check responses.
+### About Non-Interactive Shell (`/sbin/nologin`)
+- **Purpose:** The user yousuf is now created with a non-interactive shell as requested for the backup agent tool specifications
+- **Use Case:** Ideal for service accounts, backup agents, and system processes
+- **Security:** User cannot log in via SSH or console but can be used by applications
+
+
+## Task Completion
+✅ User `yousuf` created successfully on App Server 3  
+✅ Non-interactive shell (`/sbin/nologin`) assigned  
+✅ Suitable for backup agent tool specifications  
