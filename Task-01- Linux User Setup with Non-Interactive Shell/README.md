@@ -1,4 +1,4 @@
- #Task: Create user 'yousuf' with non-interactive shell on App Server 3
+ # Task: Create user 'yousuf' with non-interactive shell on App Server 3
  
 ## Solution Steps
 
@@ -7,7 +7,7 @@ From the jump_host, SSH to App Server 3:
 ```bash
 ssh banner@stapp03.stratos.xfusioncorp.com
 ```
-**Password:** `BigGr33n`
+
 
 ### Step 2: Switch to Root Privileges
 ```bash
