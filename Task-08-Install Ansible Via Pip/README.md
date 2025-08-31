@@ -22,6 +22,7 @@ sudo pip3 install ansible==4.9.0
 ```bash
 ansible --version
 ```
+<img width="1347" height="486" alt="image" src="https://github.com/user-attachments/assets/42f9b3d6-db23-4fc8-86ca-3930ae187ffe" />
 
 ## Key-Points
 

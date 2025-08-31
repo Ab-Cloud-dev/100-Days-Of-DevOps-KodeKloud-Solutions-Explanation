@@ -26,9 +26,7 @@ ssh-keygen -t rsa -N "" -f "$HOME/.ssh/id_rsa"
 Use ssh-copy-id to copy thor's public key to tony's authorized_keys file while bypassing host key verification prompts. 
 
 ```bash
-
 ssh-copy-id -o StrictHostKeyChecking=no  tony@172.16.238.10
-
 ```
 
 You will be prompted for tony's password on the app server. Enter it to allow the key copy.
