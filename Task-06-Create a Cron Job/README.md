@@ -22,6 +22,9 @@ sudo systemctl enable crond         # Enable auto-start on boot
 sudo systemctl status crond         # Verify service is active
 ```
 
+<img width="1593" height="726" alt="image" src="https://github.com/user-attachments/assets/c2f83a80-999e-48fa-b5d8-705f0b1cc3e7" />
+
+
 ### Step 3: Add the cron job for root user
 
 
@@ -41,6 +44,7 @@ This lists all cron jobs for the root user, confirming your entry was added
 ```bash
 sudo crontab -l -u root
 ```
+<img width="1593" height="726" alt="image" src="https://github.com/user-attachments/assets/253ded9b-164e-46e6-8807-97aacd122092" />
 
 ### 5. Check execution (after 5 minutes)
 
