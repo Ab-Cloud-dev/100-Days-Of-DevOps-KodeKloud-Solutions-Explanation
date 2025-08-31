@@ -33,8 +33,7 @@ sudo yum install -y policycoreutils selinux-policy selinux-policy-targeted
 
 ```
 
-Take Backup
-
+<img width="1434" height="531" alt="image" src="https://github.com/user-attachments/assets/fac77488-6d7c-4921-a55a-c7fd9d12f94f" />
 
 **Package Descriptions:**
 - `selinux-policy`: Core SELinux policy
@@ -49,6 +48,8 @@ Check if the packages were installed successfully:
 rpm -qa | grep selinux
 rpm -qa | grep policycoreutils
 ```
+
+
 ## Step 6: Permanently Disable SELinux
 Edit the SELinux configuration file to permanently disable it:
 
@@ -80,6 +81,10 @@ SELINUX=disabled
 Even though we're disregarding the current command-line status, you can verify the configuration:
 
 Configuration file should show SELINUX=disabled
+
+
+<img width="1606" height="524" alt="image" src="https://github.com/user-attachments/assets/3ded2e90-5900-42f9-972b-fadec646bede" />
+
 
 ```bash
 
