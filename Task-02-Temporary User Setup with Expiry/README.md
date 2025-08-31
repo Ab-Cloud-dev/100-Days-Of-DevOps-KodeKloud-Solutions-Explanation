@@ -11,6 +11,10 @@ Run the following command:
 sudo useradd -e 2024-04-15 anita
 ```
 
+<img width="1546" height="259" alt="image" src="https://github.com/user-attachments/assets/38514869-0f3b-4c0d-aaa7-cae4b58ca380" />
+
+
+
 ## Step 2 : Verify the User Expiry Date
 
 To check the details of the created user:
@@ -27,6 +31,7 @@ getent passwd anita
 
 ```
 
+<img width="1192" height="374" alt="image" src="https://github.com/user-attachments/assets/20c25ae8-c1b1-45a2-9c4f-ff52211c07d1" />
 
 This will display the user entry in /etc/passwd.
 
