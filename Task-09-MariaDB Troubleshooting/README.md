@@ -18,7 +18,8 @@ the systemctl status confirms MariaDB exists right after starting, but it’s no
 
 The actual cause will almost always be in the MariaDB error log.
 
-<img width="1516" height="845" alt="image" src="https://github.com/user-attachments/assets/3582632a-f0fc-47fa-9753-f098f9829302" />
+<img width="1000" height="417" alt="image" src="https://github.com/user-attachments/assets/ce649a01-fa51-4d42-ac02-a5a336357384" />
+
 
 
 #### Step 2: Trying to Start the Service, but unable to do so

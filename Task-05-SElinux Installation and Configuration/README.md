@@ -59,9 +59,12 @@ cp /etc/selinux/config /etc/selinux/config.backup
 ```
 
 Edit the configuration file:
+
 ```bash
 vi /etc/selinux/config
 ```
+
+or use sed command
 
 **Change the following line:**
 ```bash
@@ -80,16 +83,18 @@ SELINUX=disabled
 ### Current Status Check (Before Reboot)
 Even though we're disregarding the current command-line status, you can verify the configuration:
 
-Configuration file should show SELINUX=disabled
+Configuration file and sestatus should show SELINUX=disabled
 
 
-<img width="1606" height="524" alt="image" src="https://github.com/user-attachments/assets/3ded2e90-5900-42f9-972b-fadec646bede" />
+<img width="557" height="179" alt="image" src="https://github.com/user-attachments/assets/1912ebad-465f-4a47-9b4e-be36c8485428" />
+
 
 
 ```bash
 
 
 grep "^SELINUX=" /etc/selinux/config
+sestatus
 ```
 
 

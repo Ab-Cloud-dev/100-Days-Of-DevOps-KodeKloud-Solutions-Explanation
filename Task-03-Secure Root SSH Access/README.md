@@ -54,7 +54,8 @@ grep -q "^PermitRootLogin" /etc/ssh/sshd_config || echo "PermitRootLogin no" >> 
 systemctl restart sshd
 ```
 
-<img width="1442" height="1125" alt="image" src="https://github.com/user-attachments/assets/0dd48c42-e06c-4ddf-9f80-75ad3bb00bc6" />
+<img width="1038" height="639" alt="image" src="https://github.com/user-attachments/assets/cc53433b-e46a-4932-ae7a-75ccbe9278c8" />
+
 
 
 
