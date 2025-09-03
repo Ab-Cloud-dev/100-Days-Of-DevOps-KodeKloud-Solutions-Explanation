@@ -102,7 +102,7 @@ systemctl status tomcat
 ```
 
 
-#### Step 10:Test from Jump Host
+#### Step 10: Test from Jump Host
 
 Return to jump_host and test:
 
