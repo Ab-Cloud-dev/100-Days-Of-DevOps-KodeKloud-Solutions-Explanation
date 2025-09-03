@@ -1,54 +1,110 @@
-# Task 02: MariaDb Troubleshooting
+# Task 04: Install and Configure Tomcat Server on App Server 2
 
 ## Objective
 
-a. Create a zip archive named xfusioncorp_news.zip of /var/www/html/news directory.
-
-
-b. Save the archive in /backup/ on App Server 1. This is a temporary storage, as backups from this location will be clean on weekly basis. Therefore, we also need to save this backup archive on Nautilus Backup Server.
-
-
-c. Copy the created archive to Nautilus Backup Server server in /backup/ location.
-
-
-d. Please make sure script won't ask for password while copying the archive file. Additionally, the respective server user (for example, tony in case of App Server 1) must be able to run it.
-
-
-e. Do not use sudo inside the script.
+1. Install Tomcat server on App Server 2
+2. Configure it to run on port 3003
+3. Deploy ROOT.war file from Jump host
+4. Ensure webpage works on base URL: `curl http://stapp02:3003`
 
 
 ## Step-by-Step Solution
 
 
+Phase 1: Copy WAR File from Jump Host to App Server 2
 
-#### Step 1: Creating SSh Key for passwordLess login to backup Server And Installing Zip
+#### Step 1: Verify WAR File on Jump Host
 
-
-```bash
-ssh-keygen -t rsa -N "" -f "$HOME/.ssh/id_rsa"
-ssh-copy-id -o StrictHostKeyChecking=no  clint@stbkp01
-sudo yum install zip -y
-```
-
-
-
-#### Step 2: Making an Scripts as per Objectives
+From jump_host, check if the ROOT.war file exists:
 
 ```bash
-vi /scripts/news_backup.sh
-chmod +x /scripts/news_backup.sh 
-```
-news_backup.sh contains below
-```
-#!/bin/bash
-zip -r /backup/xfusioncorp_news.zip /var/www/html/news 
-
-scp /backup/xfusioncorp_news.zip clint@stbkp01:/backup
+ls -la /tmp/ROOT.war
 ```
 
+#### Step 2: Copy ROOT.war to App Server 2
 
-#### Step 3: Running the Script
+From jump_host, copy the WAR file to App Server 2:
 
 ```bash
-sh /scripts/news_backup.sh 
+scp /tmp/ROOT.war steve@stapp02.stratos.xfusioncorp.com:/tmp/
 ```
+
+### Phase 2: Install and Configure Tomcat on App Server 2
+
+#### Step 3: Connect to App Server 2
+
+```bash
+ssh steve@stapp02.stratos.xfusioncorp.com
+```
+
+
+<img width="1577" height="405" alt="image" src="https://github.com/user-attachments/assets/9d623bfb-969c-4503-9339-369a544d9ae3" />
+
+
+#### Step 4: Installing Tomcat Server
+
+```bash
+ sudo yum install tomcat -y
+```
+
+
+#### Step 5: Configure Tomcat Port
+
+Edit the server configuration to use port 3001:
+
+```bash
+cp /opt/tomcat/conf/server.xml /opt/tomcat/conf/server.xml.backup
+```
+
+Edit server.xml:
+
+```bash
+vi /opt/tomcat/conf/server.xml
+```
+
+Find the Connector section and change port from 8080 to 3001:
+
+```xml
+<!-- Change this line: -->
+<Connector port="8080" protocol="HTTP/1.1"
+
+<!-- To: -->
+<Connector port="3001" protocol="HTTP/1.1"
+```
+
+#### Step 6: Alternative Method Using sed
+
+```bash
+sed -i 's/port="8080"/port="3003"/g' /opt/tomcat/conf/server.xml
+```
+
+#### Step 7: Verify Port Configuration
+
+```bash
+grep -n "port.*3003" /opt/tomcat/conf/server.xml
+```
+
+<img width="1188" height="570" alt="image" src="https://github.com/user-attachments/assets/304c7671-bdbe-416c-bf95-80c8a1fa54cb" />
+
+
+#### Step 8: Enable and Start Tomcat Service
+
+```bash
+systemctl daemon-reload
+systemctl enable tomcat
+systemctl start tomcat
+```
+
+#### Step 9: Check Tomcat Status
+
+```bash
+systemctl status tomcat
+```
+
+
+#### Step 10:Test from Jump Host
+
+Return to jump_host and test:
+
+<img width="1188" height="641" alt="image" src="https://github.com/user-attachments/assets/e24a74b7-26a0-4478-9782-07f35d32dcf4" />
+
