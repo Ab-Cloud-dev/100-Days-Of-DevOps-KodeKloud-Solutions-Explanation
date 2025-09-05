@@ -24,21 +24,19 @@ sudo yum install nginx -y
 nginx -v
 ```
 
-## Step 3: Check Apache Status on App Servers (Optional Verification)
+## Step 3: Check on which Port Apache service is configured on App Server
 
-Before configuring the load balancer, let's verify Apache is running on all app servers:
+configuring the load balancer, let's verify Apache is running on all app servers:
 
 ```bash
-# Check from LBR server or go back to jump host
-# From jump host:
-ssh tony@stapp01 "sudo systemctl status httpd && sudo netstat -tlnp | grep httpd"
-ssh steve@stapp02 "sudo systemctl status httpd && sudo netstat -tlnp | grep httpd"
-ssh banner@stapp03 "sudo systemctl status httpd && sudo netstat -tlnp | grep httpd"
+ sudo cat  /etc/httpd/conf/httpd.conf | grep "Listen"
+curl http://localhost:8084
 ```
+<img width="1059" height="240" alt="image" src="https://github.com/user-attachments/assets/d09c48a1-e71c-4bdb-ac19-45b67a5b42af" />
 
-## Step 4: Configure Nginx Load Balancer
+## Step 4: Then Configuring Nginx Load Balancer
 
-Back on the LBR server (stlb01), edit the main nginx configuration:
+Back on the LBR server (stlb01), edit the main nginx configuration as per the port configured for the Apache service on App server, so that LB can relay the traffic to AppServers:
 
 ```bash
 # Backup the original configuration
@@ -47,6 +45,9 @@ sudo cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.backup
 # Edit the main nginx configuration file
 sudo vi /etc/nginx/nginx.conf
 ```
+
+<img width="1260" height="442" alt="image" src="https://github.com/user-attachments/assets/da019e4e-b76b-48dd-ab3e-5de58c536fbc" />
+
 
 ## Step 5: Nginx Configuration Content
 
@@ -82,9 +83,9 @@ http {
 
     # Load balancer upstream configuration
     upstream app_servers {
-        server 172.16.238.10:80;    # stapp01
-        server 172.16.238.11:80;    # stapp02
-        server 172.16.238.12:80;    # stapp03
+        server 172.16.238.10:8084;    # stapp01
+        server 172.16.238.11:8084;    # stapp02
+        server 172.16.238.12:8084;    # stapp03
     }
 
     # Default server configuration
@@ -124,6 +125,7 @@ sudo nginx -t
 # nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 # nginx: configuration file /etc/nginx/nginx.conf test is successful
 ```
+<img width="1369" height="340" alt="image" src="https://github.com/user-attachments/assets/aa663f5c-edea-488b-a4f8-5c1a8a01a8eb" />
 
 ## Step 7: Start and Enable Nginx
 
@@ -142,56 +144,22 @@ sudo netstat -tlnp | grep :80
 sudo ss -tlnp | grep :80
 ```
 
-## Step 8: Configure Firewall (if needed)
 
-```bash
-# Check if firewall is running
-sudo systemctl status firewalld
-
-# If firewalld is running, allow HTTP traffic
-sudo firewall-cmd --permanent --add-service=http
-sudo firewall-cmd --reload
-
-# Verify the rule
-sudo firewall-cmd --list-services
-```
-
-## Step 9: Verify Load Balancer is Working
+## Step 8: Verify Load Balancer is Working
 
 ```bash
 # Test locally from LBR server
 curl http://localhost
-
-# Check if it's responding
-curl -I http://localhost
-
-# Test multiple requests to see load balancing
-for i in {1..5}; do
-    echo "Request $i:"
-    curl http://localhost
-    echo "---"
-done
 ```
+<img width="763" height="148" alt="image" src="https://github.com/user-attachments/assets/15d6c29a-374d-4407-a7de-5770acaccc27" />
 
-## Step 10: Final Verification from Jump Host
+
+## Step 10: Final Verification from Jump Host and clicking on provided link
 
 Exit from LBR server and test from jump host:
 
-```bash
-# Exit from LBR server
-exit
+<img width="934" height="175" alt="image" src="https://github.com/user-attachments/assets/0aef6cbd-ec10-4e75-874c-b45c24bc05da" />
 
-# From jump host, test the load balancer
-curl http://stlb01
-curl -I http://stlb01
-
-# Test multiple requests to verify load balancing
-for i in {1..3}; do
-    echo "Request $i to Load Balancer:"
-    curl http://stlb01
-    echo "---"
-done
-```
 
 ## Troubleshooting Commands
 
@@ -205,9 +173,9 @@ sudo tail -f /var/log/nginx/error.log
 sudo tail -f /var/log/nginx/access.log
 
 # Check if app servers are reachable from LBR
-telnet 172.16.238.10 80
-telnet 172.16.238.11 80  
-telnet 172.16.238.12 80
+telnet 172.16.238.10 8084
+telnet 172.16.238.11 8084 
+telnet 172.16.238.12 8084
 
 # Restart nginx if needed
 sudo systemctl restart nginx
@@ -218,7 +186,7 @@ ps aux | grep nginx
 
 ## Important Notes
 
-1. **Apache Port**: The configuration uses port 80 for Apache (default HTTP port). Do not change Apache configuration.
+1. **Apache Port**: The configuration uses port 8084 for Apache. Do not change Apache configuration.
 
 2. **Load Balancing Method**: Using default round-robin load balancing.
 
