@@ -19,7 +19,6 @@ We have one of our websites up and running on our Nautilus infrastructure in Str
 First, let's test the connectivity to stapp01 on port 8086:
 
 ```bash
-
 sudo yum install ansible -y
 ```
 
