@@ -51,7 +51,7 @@ And stopping that service and restarting the httpd
 
 <img width="855" height="206" alt="image" src="https://github.com/user-attachments/assets/23b15452-3387-4106-906a-2659e88535b9" />
 
-But Still not able to access over 8085
+But Still not able to access over 8086
 
 <img width="1326" height="142" alt="image" src="https://github.com/user-attachments/assets/4b202ba5-c9ad-465c-ba9d-9880400c229a" />
 
