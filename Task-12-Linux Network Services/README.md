@@ -91,6 +91,10 @@ HTTP on 8086 fails (No route to host) because the packet hits the final REJECT r
 
 You need to add an ACCEPT rule for port 8086 before the REJECT rule.
 
+and also don't get confused on **ACCEPT all -- 0.0.0.0/0 0.0.0.0/0 state RELATED,ESTABLISHED:**
+
+This rule allows all traffic that is part of an established connection. For example, when you connect to a website, this rule ensures that the returning packets from the website are accepted by your server. It also accepts traffic "related" to an established connection,
+
 ```
 sudo iptables -I INPUT -p tcp --dport 8086 -j ACCEPT
 sudo service iptables save
