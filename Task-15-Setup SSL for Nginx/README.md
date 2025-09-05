@@ -73,8 +73,8 @@ Restrict permissions on the key files to ensure only privileged users can read t
 sudo chmod 600 /etc/nginx/ssl/nautilus.key
 sudo chmod 644 /etc/nginx/ssl/nautilus.crt
 ```
+<img width="1341" height="511" alt="image" src="https://github.com/user-attachments/assets/4f33bc76-e037-425d-a095-34945d312ecc" />
 
-![](C:\Users\moham\AppData\Roaming\marktext\images\2025-09-05-15-52-09-image.png)
 
 ## 7. Set Secure Permissions for Key Files
 
@@ -82,7 +82,8 @@ then feed the cert and key location in the ngnix configuration And uncomment the
 
 
 
-![](C:\Users\moham\AppData\Roaming\marktext\images\2025-09-05-15-55-43-image.png)
+<img width="1292" height="891" alt="image" src="https://github.com/user-attachments/assets/84dac02d-1eda-461c-a75c-8e0b6449f04e" />
+
 
 
 
@@ -122,7 +123,8 @@ echo "Welcome!" | sudo tee /usr/share/nginx/html/index.html
 
 
 
-![](C:\Users\moham\AppData\Roaming\marktext\images\2025-09-05-15-53-47-image.png)
+<img width="1480" height="583" alt="image" src="https://github.com/user-attachments/assets/ef7e364f-1b01-4f44-b47b-38da9d696b39" />
+
 
 ---
 
