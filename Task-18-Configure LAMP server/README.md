@@ -18,7 +18,7 @@ e. Finally you should be able to access the website on LBR link, by clicking on 
 
 ## Part A: Configure MariaDB on Database Server
 
-### Step 6: Install and Configure MariaDB on stdb01
+### Step 1: Install and Configure MariaDB on stdb01
 
 ```bash
 # SSH to database server
@@ -36,7 +36,7 @@ sudo systemctl status mariadb
 ```
 <img width="797" height="727" alt="image" src="https://github.com/user-attachments/assets/03846536-8983-4c41-8c56-cbc90c2b5e35" />
 
-### Step 7: Secure MariaDB Installation
+### Step 2: Secure MariaDB Installation
 
 ```bash
 # Run mysql secure installation
@@ -53,7 +53,7 @@ sudo mysql_secure_installation
 # - Reload privilege tables? [Y/n]: Y
 ```
 
-### Step 8: Create Database and User
+### Step 3: Create Database and User
 
 ```bash
 # Login to MySQL as root
@@ -79,7 +79,7 @@ SELECT User, Host FROM mysql.user WHERE User = 'kodekloud_gem';
 EXIT;
 ```
 
-### Step 9: Configure MariaDB for Remote Connections
+### Step 4: Configure MariaDB for Remote Connections
 
 #### create a new configuration file
 ```bash 
@@ -95,7 +95,7 @@ EOF
 sudo systemctl restart mariadb
 ```
 
-### Step 10: Test Database Connection
+### Step 5: Test Database Connection
 
 ```bash
 # Test connection locally
@@ -108,7 +108,7 @@ exit
 
 ## Part B: Configure App Servers (stapp01, stapp02, stapp03)
 
-### Step 1: Install HTTPD and PHP on stapp01, stapp02, stapp03
+### Step 6: Install HTTPD and PHP on stapp01, stapp02, stapp03
 
 ```bash
 # SSH to stapp01
@@ -123,7 +123,7 @@ httpd -v
 ```
 
 
-### Step 2: Configure Apache to serve on port 8089
+### Step 7: Configure Apache to serve on port 8089
 
 ```bash
 # Edit the main Apache configuration
@@ -133,7 +133,6 @@ sudo vi /etc/httpd/conf/httpd.conf
 # Listen 8089
 ```
 
-<img width="628" height="195" alt="image" src="https://github.com/user-attachments/assets/8b8ed65d-4f91-4f96-801e-1ce1cdba8b4b" />
 
 
 # Create a simple PHP test file
@@ -180,7 +179,7 @@ sudo chown apache:apache /var/www/html/index.php
 sudo chmod 644 /var/www/html/index.php
 ```
 
-### Step 3: Configure Firewall and Start Services on stapp01
+### Step 8: Configure Firewall and Start Services on stapp01
 
 #### Configure firewall for port 8089
 
@@ -208,7 +207,7 @@ exit
 
 ## Part C: Update Load Balancer Configuration
 
-### Step 11: Update Nginx Configuration for Port 8089
+### Step 9: Update Nginx Configuration for Port 8089
 
 ```bash
 # SSH to load balancer
@@ -250,7 +249,7 @@ exit
 
 ## Part D: Final Verification
 
-### Step 12: Test the Complete Setup
+### Step 10: Test the Complete Setup
 
 ```bash
 # From jump host, test individual app servers
