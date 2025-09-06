@@ -1,4 +1,10 @@
-# Apache Service Troubleshooting on stapp01
+# Task14: Apache Service Troubleshooting on stapp01
+
+a. Identify the faulty app host and fix the issue. Make sure Apache service is up and running on all app hosts.
+
+b. They might not have hosted any code yet on these servers, so you don’t need to worry if Apache isn’t serving any pages.
+
+c. Just make sure the service is up and running. Also, make sure Apache is running on port 8086 on all app servers.
 
 ## Step 1: Initial Connectivity Check from Jump Host
 
