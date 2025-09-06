@@ -1,4 +1,4 @@
-# Task14: Apache Service Troubleshooting on stapp01
+# Task-14: Apache Service Troubleshooting on stapp01
 
 a. Identify the faulty app host and fix the issue. Make sure Apache service is up and running on all app hosts.
 
