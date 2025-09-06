@@ -96,7 +96,11 @@ include fastcgi_params; & fastcgi_param ...: Passes necessary parameters to PHP-
 ```bash
 sudo systemctl enable php-fpm --now
 sudo systemctl enable nginx --now
+curl http://stapp01:8092/index.php
 ```
+
+<img width="532" height="62" alt="image" src="https://github.com/user-attachments/assets/abb320a5-765c-4e8a-8203-f2c9f968ba17" />
+
 
 These commands use systemctl to manage the system services.
 
