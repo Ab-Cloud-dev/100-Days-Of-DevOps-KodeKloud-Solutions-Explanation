@@ -1,12 +1,22 @@
-# Apache Setup on App Server 2 - Complete Solution
+# Task-19: Apache Setup on App Server 2 - Complete Solution
 
-Since you're already logged into the jump_host, here's the step-by-step solution:
+a. Install httpd package and dependencies on app server 2.
+
+
+b. Apache should serve on port 6000.
+
+
+c. There are two website's backups /home/thor/ecommerce and /home/thor/demo on jump_host. Set them up on Apache in a way that ecommerce should work on the link http://localhost:6000/ecommerce/ and demo should work on link http://localhost:6000/demo/ on the mentioned app server.
+
+
+d. Once configured you should be able to access the website using curl command on the respective app server, i.e curl http://localhost:6000/ecommerce/ and curl http://localhost:6000/demo/
+
+
 
 ## Step 1: Connect to App Server 2
 ```bash
 # From jump_host, SSH to app server 2
-ssh steve@stapp02.stratos.xfusioncorp.com
-# Password: Am3ric@
+ssh steve@stapp02
 ```
 
 ## Step 2: Install httpd Package and Dependencies
@@ -34,23 +44,17 @@ Listen 6000
 
 # Save and exit the file (:wq in vi)
 ```
+<img width="362" height="84" alt="image" src="https://github.com/user-attachments/assets/016c9d99-400f-4822-ad99-aa84456a5090" />
 
-## Step 4: Copy Website Backups from Jump Host
+
+## Step 4: Copy Website Backups from Jump Host, 
+First login at the jump host:
 ```bash
-# Exit from root back to steve user
-exit
-
-# Copy the website backups from jump_host to app server 2
-# First, copy ecommerce backup
-scp -r thor@jump_host.stratos.xfusioncorp.com:/home/thor/ecommerce /tmp/
-# Password for thor: mjolnir123
-
-# Copy demo backup
-scp -r thor@jump_host.stratos.xfusioncorp.com:/home/thor/demo /tmp/
-# Password for thor: mjolnir123
+scp -r /home/thor/ecommerce steve@stapp02.stratos.xfusioncorp.com:/tmp/
+scp -r /home/thor/demo steve@stapp02.stratos.xfusioncorp.com:/tmp/
 ```
 
-## Step 5: Set Up Website Directories
+## Step 5: On Stapp02 Set Up Website Directories
 ```bash
 # Switch back to root
 sudo su -
@@ -69,6 +73,7 @@ chown -R apache:apache /var/www/html/demo
 chmod -R 755 /var/www/html/ecommerce
 chmod -R 755 /var/www/html/demo
 ```
+<img width="967" height="218" alt="image" src="https://github.com/user-attachments/assets/524c3163-5411-4e1f-be55-6bd071fe3c29" />
 
 ## Step 6: Start and Enable Apache Service
 ```bash
@@ -80,14 +85,10 @@ systemctl enable httpd
 
 # Check the status
 systemctl status httpd
-
-# Verify Apache is listening on port 6000
-ss -tlnp | grep :6000
-# or
-netstat -tlnp | grep :6000
 ```
 
 ## Step 7: Test the Configuration
+
 ```bash
 # Test ecommerce website
 curl http://localhost:6000/ecommerce/
@@ -100,20 +101,12 @@ curl http://localhost:6000/ecommerce/index.html
 curl http://localhost:6000/demo/index.html
 ```
 
-## Alternative One-Liner Commands (if needed)
-If you prefer to execute some commands in one go:
+<img width="670" height="303" alt="image" src="https://github.com/user-attachments/assets/98daba5b-cf1c-42ab-a45d-8281b814c0cf" />
 
-```bash
-# Quick setup from jump_host
-ssh steve@stapp02.stratos.xfusioncorp.com "sudo yum install httpd -y && sudo sed -i 's/Listen 80/Listen 6000/' /etc/httpd/conf/httpd.conf"
+And the from Jump host
 
-# Copy files and set permissions
-scp -r /home/thor/ecommerce steve@stapp02.stratos.xfusioncorp.com:/tmp/
-scp -r /home/thor/demo steve@stapp02.stratos.xfusioncorp.com:/tmp/
 
-# Final setup on app server 2
-ssh steve@stapp02.stratos.xfusioncorp.com "sudo cp -r /tmp/ecommerce/* /var/www/html/ecommerce/ && sudo cp -r /tmp/demo/* /var/www/html/demo/ && sudo chown -R apache:apache /var/www/html/ && sudo chmod -R 755 /var/www/html/ && sudo systemctl start httpd && sudo systemctl enable httpd"
-```
+
 
 ## Troubleshooting Tips
 - If curl commands don't work, check if there are index.html files in the directories
@@ -121,13 +114,13 @@ ssh steve@stapp02.stratos.xfusioncorp.com "sudo cp -r /tmp/ecommerce/* /var/www/
 - Check Apache error logs: `sudo tail -f /var/log/httpd/error_log`
 - Ensure the directories have proper structure and files
 
+<img width="817" height="414" alt="image" src="https://github.com/user-attachments/assets/d5698435-189c-4beb-ba84-fc86da541e83" />
+
 ## Verification Commands
 ```bash
 # Check Apache status
 sudo systemctl status httpd
 
-# Check if port 6000 is listening
-sudo ss -tlnp | grep :6000
 
 # List files in website directories
 ls -la /var/www/html/ecommerce/
