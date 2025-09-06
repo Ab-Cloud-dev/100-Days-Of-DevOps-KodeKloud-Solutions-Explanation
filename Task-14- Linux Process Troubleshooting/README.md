@@ -40,7 +40,7 @@ Address already in use: AH00072: make_sock: could not bind to address 0.0.0.0:80
 
 That means apache2 service is already configured with the port 8083
  
-So checking any other service = is taking that port and  Stopping it if any. Then  restarting the httpd service. This should  be enough, as we don't have to worry if Apache isn’t serving any pages. Our task is Just making  sure the service is up and running. 
+First we have to verify whether any other service is using that port and  as we can see the sendmail service is using that port. Our task is run the apache server over the port 8083. SO we will be Stopping the sendmail service. And then restarting the httpd service. This should  be enough, as we don't have to worry if Apache isn’t serving any pages. Our task is to ensure the service is up and running over port 8083. 
 
 ```bash
 # Test connectivity using telnet
