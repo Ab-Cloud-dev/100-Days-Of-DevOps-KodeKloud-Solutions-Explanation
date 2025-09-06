@@ -22,7 +22,7 @@ sudo git clone /opt/demo.git
 <img width="879" height="768" alt="image" src="https://github.com/user-attachments/assets/e1393fbb-f7b8-48ce-96e7-fa87125a9a78" />
 
 
-There are  has no commits for the repo  /opt/demo.git, the clone will succeed but the working directory (/usr/src/kodekloudrepos) will look empty except for the .git/ folder.
+There are no commits for the repo  /opt/demo.git, the clone will succeed but the working directory (/usr/src/kodekloudrepos) will look empty except for the .git/ folder.
 
 That’s why earlier you saw only .git/ and no files. The warning: **You appear to have cloned an empty repository** message is just Git telling you “the repo is valid, but it has no commits yet.”
 
