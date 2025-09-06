@@ -16,188 +16,7 @@ d. Create a database named kodekloud_db4 and create a database user named kodekl
 
 e. Finally you should be able to access the website on LBR link, by clicking on the App button on the top bar. You should see a message like App is able to connect to the database using user kodekloud_gem
 
-
-## Part A: Configure App Servers (stapp01, stapp02, stapp03)
-
-### Step 1: Install HTTPD and PHP on stapp01
-
-```bash
-# SSH to stapp01
-ssh tony@stapp01
-
-# Install httpd, php and dependencies
-sudo yum install httpd php php-mysqlnd  -y
-
-# Check installation
-php --version
-httpd -v
-```
-<img width="609" height="214" alt="image" src="https://github.com/user-attachments/assets/e5e45e43-d456-4015-8fc7-aa6e1c199335" />
-
-### Step 2: Configure Apache to serve on port 8089
-
-```bash
-# Edit the main Apache configuration
-sudo vi /etc/httpd/conf/httpd.conf
-
-# Find the Listen directive and change it to:
-# Listen 8089
-```
-
-<img width="628" height="195" alt="image" src="https://github.com/user-attachments/assets/8b8ed65d-4f91-4f96-801e-1ce1cdba8b4b" />
-
-
-# Create a simple PHP test file
-```
-sudo tee /var/www/html/index.php << 'EOF'
-<?php
-$servername = "172.16.239.10";  // DB Server IP
-$username = "kodekloud_gem";
-$password = "LQfKeWWxWD";
-$dbname = "kodekloud_db4";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-echo "App is able to connect to the database using user kodekloud_gem";
-$conn->close();
-?>
-EOF
-```
-
-# Set proper permissions
-```
-sudo chown apache:apache /var/www/html/index.php
-sudo chmod 644 /var/www/html/index.php
-```
-
-### Step 3: Configure Firewall and Start Services on stapp01
-
-```bash
-# Configure firewall for port 8089
-sudo firewall-cmd --permanent --add-port=8089/tcp
-sudo firewall-cmd --reload
-
-# Start and enable httpd
-sudo systemctl start httpd
-sudo systemctl enable httpd
-
-# Check if httpd is listening on port 8089
-sudo netstat -tlnp | grep :8089
-sudo systemctl status httpd
-
-# Test locally
-curl http://localhost:8089
-
-# Exit from stapp01
-exit
-```
-
-### Step 4: Repeat for stapp02
-
-```bash
-# SSH to stapp02
-ssh steve@stapp02
-
-# Install httpd, php and dependencies
-sudo yum install httpd php php-mysql php-mysqli php-json php-curl -y
-
-# Configure port 8089
-echo "Listen 8089" | sudo tee -a /etc/httpd/conf.d/port8089.conf
-
-# Create the same PHP file
-sudo tee /var/www/html/index.php << 'EOF'
-<?php
-$servername = "172.16.239.10";
-$username = "kodekloud_gem";
-$password = "LQfKeWWxWD";
-$dbname = "kodekloud_db4";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-echo "App is able to connect to the database using user kodekloud_gem";
-$conn->close();
-?>
-EOF
-
-# Set permissions
-sudo chown apache:apache /var/www/html/index.php
-sudo chmod 644 /var/www/html/index.php
-
-# Configure firewall
-sudo firewall-cmd --permanent --add-port=8089/tcp
-sudo firewall-cmd --reload
-
-# Start services
-sudo systemctl start httpd
-sudo systemctl enable httpd
-
-# Verify
-sudo netstat -tlnp | grep :8089
-curl http://localhost:8089
-
-# Exit from stapp02
-exit
-```
-
-### Step 5: Repeat for stapp03
-
-```bash
-# SSH to stapp03
-ssh banner@stapp03
-
-# Install httpd, php and dependencies
-sudo yum install httpd php php-mysql php-mysqli php-json php-curl -y
-
-# Configure port 8089
-echo "Listen 8089" | sudo tee -a /etc/httpd/conf.d/port8089.conf
-
-# Create the same PHP file
-sudo tee /var/www/html/index.php << 'EOF'
-<?php
-$servername = "172.16.239.10";
-$username = "kodekloud_gem";
-$password = "LQfKeWWxWD";
-$dbname = "kodekloud_db4";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-echo "App is able to connect to the database using user kodekloud_gem";
-$conn->close();
-?>
-EOF
-
-# Set permissions
-sudo chown apache:apache /var/www/html/index.php
-sudo chmod 644 /var/www/html/index.php
-
-# Configure firewall
-sudo firewall-cmd --permanent --add-port=8089/tcp
-sudo firewall-cmd --reload
-
-# Start services
-sudo systemctl start httpd
-sudo systemctl enable httpd
-
-# Verify
-sudo netstat -tlnp | grep :8089
-curl http://localhost:8089
-
-# Exit from stapp03
-exit
-```
-
-## Part B: Configure MariaDB on Database Server
+## Part A: Configure MariaDB on Database Server
 
 ### Step 6: Install and Configure MariaDB on stdb01
 
@@ -262,29 +81,18 @@ EXIT;
 
 ### Step 9: Configure MariaDB for Remote Connections
 
-```bash
-# Edit MariaDB configuration
-sudo vi /etc/my.cnf
-
-# Add or modify the bind-address setting in [mysqld] section:
-# [mysqld]
-# bind-address = 0.0.0.0
-
-# Or create a new configuration file
+#### create a new configuration file
+```bash 
 sudo tee /etc/my.cnf.d/server.cnf << 'EOF'
 [mysqld]
 bind-address = 0.0.0.0
 EOF
+```
 
-# Restart MariaDB
+####  Restart MariaDB
+
+```
 sudo systemctl restart mariadb
-
-# Configure firewall for MySQL port 3306
-sudo firewall-cmd --permanent --add-port=3306/tcp
-sudo firewall-cmd --reload
-
-# Verify MariaDB is listening on all interfaces
-sudo netstat -tlnp | grep :3306
 ```
 
 ### Step 10: Test Database Connection
@@ -296,7 +104,107 @@ mysql -u kodekloud_gem -p'LQfKeWWxWD' -h localhost kodekloud_db4 -e "SELECT 'Con
 # Exit from database server
 exit
 ```
-<img width="1268" height="781" alt="image" src="https://github.com/user-attachments/assets/ccce2b3d-dbf0-43d4-9e75-0443a2c987b6" />
+<img width="1073" height="155" alt="image" src="https://github.com/user-attachments/assets/e71233d3-1d33-4fe0-b35d-92c7debd8179" />
+
+## Part B: Configure App Servers (stapp01, stapp02, stapp03)
+
+### Step 1: Install HTTPD and PHP on stapp01, stapp02, stapp03
+
+```bash
+# SSH to stapp01
+ssh tony@stapp01
+
+# Install httpd, php and dependencies
+sudo yum install httpd php php-mysqlnd  -y
+
+# Check installation
+php --version
+httpd -v
+```
+
+
+### Step 2: Configure Apache to serve on port 8089
+
+```bash
+# Edit the main Apache configuration
+sudo vi /etc/httpd/conf/httpd.conf
+
+# Find the Listen directive and change it to:
+# Listen 8089
+```
+
+<img width="628" height="195" alt="image" src="https://github.com/user-attachments/assets/8b8ed65d-4f91-4f96-801e-1ce1cdba8b4b" />
+
+
+# Create a simple PHP test file
+```
+sudo tee /var/www/html/index.php << 'EOF'
+<?php
+$servername = "172.16.239.10";  // DB Server IP
+$username = "kodekloud_gem";
+$password = "LQfKeWWxWD";
+$dbname = "kodekloud_db4";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+echo "App is able to connect to the database using user kodekloud_gem";
+$conn->close();
+?>
+EOF
+```
+
+For stapp01
+
+<img width="687" height="211" alt="image" src="https://github.com/user-attachments/assets/84da4652-5b0a-4739-bd62-ab15e4015045" />
+
+
+For Stapp02
+
+<img width="683" height="192" alt="image" src="https://github.com/user-attachments/assets/e70b9895-7ce3-44c5-aac4-d7c6b1a0df1f" />
+
+
+For stapp03
+
+<img width="725" height="204" alt="image" src="https://github.com/user-attachments/assets/24670788-be7a-4bcf-bf25-c20192dd661b" />
+
+
+
+# Set proper permissions
+```
+sudo chown apache:apache /var/www/html/index.php
+sudo chmod 644 /var/www/html/index.php
+```
+
+### Step 3: Configure Firewall and Start Services on stapp01
+
+#### Configure firewall for port 8089
+
+```bash
+sudo firewall-cmd --permanent --add-port=8089/tcp
+sudo firewall-cmd --reload
+```
+
+#### Start and enable httpd
+
+```
+sudo systemctl start httpd
+sudo systemctl enable httpd
+sudo systemctl status httpd
+```
+
+# Test locally
+
+```
+curl http://localhost:8089
+```
+# Exit from stapp01
+exit
+
 
 ## Part C: Update Load Balancer Configuration
 
@@ -307,27 +215,38 @@ exit
 ssh loki@stlb01
 
 # Edit nginx configuration
+#sudo yum update -y
+sudo yum install epel-release -y
+sudo yum install nginx -y
+```
+
+#### Update the upstream section to use port 8089:
 sudo vi /etc/nginx/nginx.conf
 
-# Update the upstream section to use port 8089:
-# upstream app_servers {
-#     server 172.16.238.10:8089;
-#     server 172.16.238.11:8089;
-#     server 172.16.238.12:8089;
-# }
+```
+ upstream app_servers {
+     server 172.16.238.10:8089;
+     server 172.16.238.11:8089;
+     server 172.16.238.12:8089;
+ }
+```
+<img width="521" height="119" alt="image" src="https://github.com/user-attachments/assets/473fd824-7d79-4507-b1b4-d1ebc721209d" />
 
-# Or use sed to replace the ports
-sudo sed -i 's/:80/:8089/g' /etc/nginx/nginx.conf
 
 # Test nginx configuration
+```
 sudo nginx -t
+```
+<img width="674" height="89" alt="image" src="https://github.com/user-attachments/assets/5cf3f0c0-4081-401c-a3d3-17caa0602ceb" />
+
 
 # Restart nginx
+
 sudo systemctl restart nginx
 
 # Exit from load balancer
 exit
-```
+
 
 ## Part D: Final Verification
 
@@ -338,34 +257,29 @@ exit
 curl http://stapp01:8089
 curl http://stapp02:8089
 curl http://stapp03:8089
+```
 
-# Test through load balancer
+<img width="755" height="141" alt="image" src="https://github.com/user-attachments/assets/8f1565ce-82b3-4ec8-a321-d97a44fb2dab" />
+
+
+# Test through load balancer from host Server 
+
+```
 curl http://stlb01
+```
+
+<img width="718" height="50" alt="image" src="https://github.com/user-attachments/assets/3bc0ee4f-dcb6-492f-bc74-ecc8b80f9440" />
 
 # Test database connectivity from jump host
+
+```
 mysql -u kodekloud_gem -p'LQfKeWWxWD' -h stdb01 kodekloud_db4 -e "SELECT 'Direct DB connection works' as Status;"
 ```
 
-## Troubleshooting Commands
+# Final Verification
 
-If you encounter issues:
+<img width="593" height="258" alt="image" src="https://github.com/user-attachments/assets/fb8ef990-fa71-405d-a26c-37fd3a8a6c81" />
 
-```bash
-# Check Apache status on app servers
-ssh tony@stapp01 "sudo systemctl status httpd && sudo netstat -tlnp | grep :8089"
-
-# Check MariaDB status on DB server
-ssh peter@stdb01 "sudo systemctl status mariadb && sudo netstat -tlnp | grep :3306"
-
-# Check nginx status on LBR
-ssh loki@stlb01 "sudo systemctl status nginx && sudo netstat -tlnp | grep :80"
-
-# Check PHP errors
-ssh tony@stapp01 "sudo tail -f /var/log/httpd/error_log"
-
-# Check MariaDB logs
-ssh peter@stdb01 "sudo tail -f /var/log/mariadb/mariadb.log"
-```
 
 ## Expected Result
 
