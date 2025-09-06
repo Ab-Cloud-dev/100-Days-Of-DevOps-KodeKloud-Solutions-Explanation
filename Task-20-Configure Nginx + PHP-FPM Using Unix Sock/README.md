@@ -24,16 +24,22 @@ sudo yum install -y nginx
 ```
 
 ###Please NOTE
-
 ```
+Please not in my case I have to install the Php v8.2, if in your case it is 8.1 then please first Enable Remi's PHP 8.1 module
+
+sudo dnf module enable php:remi-8.1 -y
+# Then proceed with the Install PHP 8.1 packages
+sudo dnf install php-fpm php-cli php-common -y
+sudo yum install -y nginx
+```
+
+##FYI::
+
 Unlike Apache, which has a built-in module to process PHP (mod_php), Nginx cannot process PHP files by itself. 
 Nginx is a high-performance web server and reverse proxy, but it needs to hand off PHP requests to a separate, specialized processor.
 
 This is where PHP-FPM comes in. You install these components together so that Nginx can serve static content (images, CSS, JS) incredibly fast
  and delegate the dynamic PHP processing to PHP-FPM, resulting in a very efficient and scalable system.
-```
-
-
 
 ## Step 2: Configure PHP-FPM
 Edit the pool configuration:
