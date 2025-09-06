@@ -14,8 +14,11 @@ NOTE: We have copied two files, index.php and info.php, under /var/www/html as p
 ## Step 1: Connect to App Server 1 and install the  PHP-FPM (PHP FastCGI Process Manager) 
 ```bash
 # From jump_host, SSH to app server 3
-ssh ssh banner@172.16.238.12
-sudo yum install -y php-fpm php-cli php-mysqlnd
+ssh ssh banner@stapp03
+#Enable Remi's PHP 8.2 module
+bashsudo dnf module enable php:remi-8.2 -y
+# Install PHP 8.2
+sudo dnf install php-fpm php-cli php-common -y
 sudo yum install -y nginx
 
 ```
@@ -93,6 +96,7 @@ include fastcgi_params; & fastcgi_param ...: Passes necessary parameters to PHP-
 
 ## Step 4: Enable and Start Services
 ```bash
+sudo systemctl start php-fpm
 sudo systemctl enable php-fpm --now
 sudo systemctl enable nginx --now
 curl http://stapp03:8099/index.php
