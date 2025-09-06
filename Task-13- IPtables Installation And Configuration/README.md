@@ -2,19 +2,13 @@
 
 We have one of our websites up and running on our Nautilus infrastructure in Stratos DC. Our security team has raised a concern that right now Apache’s port i.e 3004 is open for all since there is no firewall installed on these hosts. So we have decided to add some security layer for these hosts and after discussions and recommendations we have come up with the following requirements:
 
-
-
 1. Install iptables and all its dependencies on each app host.
-
 
 2. Block incoming port 3004 on all apps for everyone except for LBR host.
 
-
 3. Make sure the rules remain, even after system reboot.
 
-   
-
-## Step 1: Install the ansible 
+## Step 1: Install the ansible
 
 First, let's test the connectivity to stapp01 on port 8086:
 
@@ -53,7 +47,6 @@ EOF
 vi iptables-playbook.yml
 ```
 
-
 ```bash
 ---
 - name: Configure iptables on App Servers
@@ -62,7 +55,7 @@ vi iptables-playbook.yml
   vars:
     lbr_host_ip: "172.16.238.14"
     blocked_port: "3004"
-  
+
   tasks:
     - name: Install iptables and dependencies
       yum:
@@ -178,9 +171,10 @@ vi iptables-playbook.yml
 ```bash
 ansible app_servers -m ping
 ```
+
 <img width="766" height="410" alt="image" src="https://github.com/user-attachments/assets/f2330879-dcc6-4880-93c9-b79c093afa9c" />
 
-## Step 4: Then check the iptables-playbook.yml 
+## Step 4: Then check the iptables-playbook.yml
 
 ```bash
 ansible-playbook iptables-playbook.yml --check
