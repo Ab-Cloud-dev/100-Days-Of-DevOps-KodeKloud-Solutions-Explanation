@@ -1,33 +1,65 @@
-# Set Up Git Repository on Storage Server
+#  Task-24: Git Create Branches
 
-1. Utilize yum to install the git package on the Storage Server.
+1. On Storage server in Stratos DC create a new branch xfusioncorp_blog from master branch in /usr/src/kodekloudrepos/blog git repo.
 
 
-2. Create a bare repository named /opt/games.git (ensure exact name usage).
+2. Please do not try to make any changes in the code.
+
+# Solution:
 
 ## Step 1: Connect to Storage Server
 ```bash
 ssh natasha@ststor01
 ```
 
+Had below errors
+
+<img width="792" height="280" alt="image" src="https://github.com/user-attachments/assets/78ac4bf1-8dc5-436c-b10b-a6c10a6f36c9" />
+
+<img width="888" height="526" alt="image" src="https://github.com/user-attachments/assets/8def160b-8162-42cc-aa9c-802e61280405" />
+
+
 ## Step 2: Configure PHP-FPM
 Edit the pool configuration:
 ```
-sudo yum install git -y
-sudo mkdir -p /opt/games.git
+# Go to the repo
+cd /usr/src/kodekloudrepos/blog
+
+#changing the ownership for switching out to master branch 
+sudo chown -R natasha:natasha /usr/src/kodekloudrepos/blog
+
+# Make sure you are on master branch--this is to ensure = xfusioncorp_blog starts from the latest data which usually is in master/main branch
+git checkout master
+
+# Create and switch to new branch xfusioncorp_blog
+git checkout -b xfusioncorp_blog
 ```
-it Installs Git on the server if it isn't already installed. The -y flag automatically confirms the installation.
-And Creates the directory /opt/games.git where the bare repository will live. The -p flag ensures any parent directories are also created if they don't exist.
 
 
+## Step 3: Verify 
 
-## Step 3: Initialize the repo
-This is the key command. It initializes a bare Git repository in the current directory (/opt/games.git).
-
-What is a bare repo? A bare repository doesn't have a working directory (no actual project files are checked out). It only contains the version control data (the .git folder contents). This is the recommended type for a central/shared remote repository on a server.
+To list the branch in repo
 ```bash
-sudo git init --bare
+git branch
 ```
+
+Fyi :: 
+🔹 What is git checkout? 
+
+
+git checkout is a command used for the following action 
+
+1) it is used to Switch the  branches
+
+git checkout branchname
+
+
+This moves your HEAD pointer to the branch and updates your working directory with that branch’s files.
+
+2) it is used to Create and switch to a new branch (shortcut)
+
+git checkout -b newbranch
+
 
 
 <img width="697" height="293" alt="image" src="https://github.com/user-attachments/assets/13640645-53f5-4f02-80be-fbd1e1cb7dd8" />
