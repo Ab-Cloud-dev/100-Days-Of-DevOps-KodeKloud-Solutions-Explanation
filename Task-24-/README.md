@@ -19,7 +19,7 @@ Had below errors
 <img width="888" height="526" alt="image" src="https://github.com/user-attachments/assets/8def160b-8162-42cc-aa9c-802e61280405" />
 
 
-## Step 2: Configure PHP-FPM
+## Step 2: Switching and Creating the New Branch
 Edit the pool configuration:
 ```
 # Go to the repo
@@ -62,5 +62,4 @@ git checkout -b newbranch
 
 
 
-<img width="697" height="293" alt="image" src="https://github.com/user-attachments/assets/13640645-53f5-4f02-80be-fbd1e1cb7dd8" />
 
