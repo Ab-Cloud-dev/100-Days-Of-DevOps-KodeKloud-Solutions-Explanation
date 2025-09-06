@@ -1,23 +1,20 @@
 # Configure Nginx + PHP-FPM Using Unix Sock
 
 
-a. Install nginx on app server 1 , configure it to use port 8092 and its document root should be /var/www/html.
+a. Install nginx on app server 3 , configure it to use port 8099 and its document rootshould be /var/www/html.
 
-
-b. Install php-fpm version 8.1 on app server 1, it must use the unix socket /var/run/php-fpm/default.sock (create the parent directories if don't exist).
-
+b. Install php-fpm version 8.2 on app server 3, it must use the unix socket /var/run/php-fpm/default.sock (create the parent directories if don't exist).
 
 c. Configure php-fpm and nginx to work together.
 
-
-d. Once configured correctly, you can test the website using curl http://stapp01:8092/index.php command from jump host.
+d. Once configured correctly, you can test the website using curl http://stapp03:8099/index.php command from jump host.
 
 NOTE: We have copied two files, index.php and info.php, under /var/www/html as part of the PHP-based application setup. Please do not modify these files.
 
 ## Step 1: Connect to App Server 1 and install the  PHP-FPM (PHP FastCGI Process Manager) 
 ```bash
-# From jump_host, SSH to app server 1
-ssh steve@stapp01
+# From jump_host, SSH to app server 3
+ssh ssh banner@172.16.238.12
 sudo yum install -y php-fpm php-cli php-mysqlnd
 sudo yum install -y nginx
 
@@ -33,16 +30,9 @@ This is where PHP-FPM comes in. You install these components together so that Ng
  and delegate the dynamic PHP processing to PHP-FPM, resulting in a very efficient and scalable system.
 ```
 
-## Step 2: Install httpd Package and Dependencies
-```bash
-sudo vi /etc/php-fpm.d/www.conf
-```
-and Changing to **"Listen 8092"**
 
-This opens the main PHP-FPM pool configuration file (www.conf). 
-The goal is to change how PHP-FPM listens for incoming requests from Nginx.
 
-## 3. Configure PHP-FPM
+## Step 2: Configure PHP-FPM
 Edit the pool configuration:
 
 ```
@@ -55,6 +45,15 @@ listen.owner = nginx
 listen.group = nginx
 listen.mode = 0660
 ```
+<img width="852" height="351" alt="image" src="https://github.com/user-attachments/assets/3e948add-575f-4ba8-a844-a466302e5a2f" />
+
+
+
+
+This opens the main PHP-FPM pool configuration file (www.conf). 
+The goal is to change how PHP-FPM listens for incoming requests from Nginx.
+
+
 Creates a new configuration file for your website (or application) inside the /etc/nginx/conf.d/ directory, which is automatically loaded by Nginx. 
 This file defines how Nginx should handle requests for your site.
 - listen: Changes the listening method from a network port to a Unix socket file. This is more efficient for communication on the same server.
@@ -63,11 +62,11 @@ This file defines how Nginx should handle requests for your site.
 
 - listen.mode: Sets secure file permissions (0660) so that only the nginx user and group can read from and write to the socket.
 
-## Configure Nginx
-Create config file /etc/nginx/conf.d/stapp01.conf:
+## Step 3: Configure Nginx
+Create config file /etc/nginx/conf.d/stapp03.conf:
 ```bash
 server {
-    listen 8092;
+    listen 8099;
     root /var/www/html;
     index index.php index.html;
 
@@ -92,14 +91,15 @@ fastcgi_pass ...: Directs Nginx to forward any request for a .php file to the PH
 
 include fastcgi_params; & fastcgi_param ...: Passes necessary parameters to PHP-FPM so it knows which script to execute.
 
-## Step 5: Enable and Start Services
+## Step 4: Enable and Start Services
 ```bash
 sudo systemctl enable php-fpm --now
 sudo systemctl enable nginx --now
-curl http://stapp01:8092/index.php
+curl http://stapp03:8099/index.php
 ```
 
-<img width="532" height="62" alt="image" src="https://github.com/user-attachments/assets/abb320a5-765c-4e8a-8203-f2c9f968ba17" />
+<img width="626" height="108" alt="image" src="https://github.com/user-attachments/assets/6a1bc792-ebbd-4c6b-bd5c-a0b259c55e38" />
+
 
 
 These commands use systemctl to manage the system services.
