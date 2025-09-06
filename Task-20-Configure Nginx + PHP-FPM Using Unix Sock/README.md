@@ -25,7 +25,7 @@ sudo yum install -y nginx
 
 ###Please NOTE
 ```
-Please not in my case I have to install the Php v8.2, if in your case it is 8.1 then please first Enable Remi's PHP 8.1 module
+Please note in my case I have to install the Php v8.2, if in your case it is 8.1 then please first Enable Remi's PHP 8.1 module
 
 sudo dnf module enable php:remi-8.1 -y
 # Then proceed with the Install PHP 8.1 packages
