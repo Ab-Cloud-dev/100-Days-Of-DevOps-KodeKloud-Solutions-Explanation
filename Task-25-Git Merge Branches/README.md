@@ -140,6 +140,8 @@ ls -la  # Should now see index.html in master branch
 ## Step 8: Push Changes to Origin
 
 ```bash
+#First changing the permision as is likely owned by root (or another user).So Git cannot create the temporary object directories there.
+sudo chown -R natasha:natasha /opt/demo.git
 # Push the master branch to origin
 git push origin master
 
@@ -161,7 +163,8 @@ ssh natasha@ststor01.stratos.xfusioncorp.com
 # Navigate and setup
 cd /usr/src/kodekloudrepos/demo
 git checkout master  # Ensure we're on master
-git pull origin master  # Get latest changes
+sudo chown -R natasha:natasha /usr/src/kodekloudrepos/demo/
+git config --global user.name "natasha"
 
 # Create and work on datacenter branch
 git checkout -b datacenter
@@ -174,6 +177,7 @@ git checkout master
 git merge datacenter
 
 # Push both branches
+sudo chown -R natasha:natasha /opt/demo.git
 git push origin master
 git push origin datacenter
 ```
