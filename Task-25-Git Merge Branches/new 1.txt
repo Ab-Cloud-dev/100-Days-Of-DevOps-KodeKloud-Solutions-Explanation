@@ -1,0 +1,25 @@
+[natasha@ststor01 cluster]$ history
+    1  cd /usr/src/kodekloudrepos
+    2  ls -la
+    3  sudo chown -R natasha:natasha /usr/src/kodekloudrepos/cluster/
+    4  ls -la /opt/cluster.git/
+    5  sudo chown -R natasha:natasha /opt/cluster.git/
+    6  pwd
+    7  ls -la
+    8  cd cluster/
+    9  pwd
+   10  ls -la
+   11  git checkout -b datacenter
+   12  cp /tmp/index.html .
+   13  git add index.html
+   14  git commit -m "Add index.html file to datacenter branch"
+   15  git config --global user.name "natasha"
+   16  git commit -m "Add index.html file to datacenter branch"
+   17  git push origin datacenter
+   18  git checkout master
+   19  git merge datacenter
+   20  git push origin master
+   21  git remote -v
+   22  git ls-remote origin
+   23  git log --oneline -n 5
+   24  history
