@@ -1,227 +1,87 @@
-# Task-25 Git Branch Management Task - Datacenter Branch Creation and Merge
+# Task-26 Git Manage Remotes
 
 
 
-1. Create a new branch `datacenter` in `/usr/src/kodekloudrepos/demo` repo from `master` and copy the `/tmp/index.html` file (present on `storage server` itself) into the repo.
+The DevOps team added some new Git remotes, so we need to update remote on /usr/src/kodekloudrepos/cluster repository as per details mentioned below:
 
-2. Further, `add/commit` this file in the new branch and merge back that branch into `master` branch. Finally, push the changes to the origin for both of the branches.
+
+a. In /usr/src/kodekloudrepos/cluster repo add a new remote dev_cluster and point it to /opt/xfusioncorp_cluster.git repository.
+
+
+b. There is a file /tmp/index.html on same server; copy this file to the repo and add/commit to master branch.
+
+
+c. Finally push master branch to this new remote origin.
 
 # **Solution**
 
 
+## **1. `sudo su -`**
 
-## Step 1: Connect to Storage Server
+- Elevating to root
+  
 
-```bash
-# From jump_host, SSH to storage server
-ssh natasha@ststor01.stratos.xfusioncorp.com
-# Password: Bl@kW
-```
+## **2. `pwd`**
 
-## Step 2: Navigate to the Repository
+- **Print Working Directory**
+  
+- Shows the current directory path
+  
+- Useful for confirming your location in the filesystem
+  
 
-```bash
-# Change to the repository directory
-cd /usr/src/kodekloudrepos/demo
+## **3. `cd /usr/src/kodekloudrepos/cluster`**
 
-# Verify you're in the correct repository
-pwd
-ls -la
+- **Change Directory** to the cluster repository folder
+  
+- Navigates to a different Git repository
+  
 
-# Check current Git status and branch
-git status
-git branch -a
-```
+## **4. `git remote add dev_cluster /opt/xfusioncorp_cluster.git`**
 
-## Step 3: Create and Switch to New Branch 'datacenter'
+- **Add a new remote repository** named "dev_cluster"
+  
+- Points to the Git repository located at `/opt/xfusioncorp_cluster.git`
+  
+- This allows pushing/pulling to/from this additional remote
+  
 
-```bash
-# Create a new branch called 'datacenter' from master
-git checkout -b datacenter
+## **5. `cp /tmp/index.html .`**
 
-# Verify you're on the new branch
-git branch
-git status
-```
+- **Copy** the `index.html` file from `/tmp/` to the **current directory**
+  
+- Adds the file to this repository
+  
 
-## Step 4: Copy the index.html File
+## **6. `git add index.html`**
 
-```bash
-# Copy the index.html file from /tmp to the current repository directory
-cp /tmp/index.html .
+- **Stage** only the `index.html` file for commit
+  
+- More specific than `git add .` (which stages all changes)
+  
 
-# Verify the file was copied
-ls -la index.html
-cat index.html  # Optional: view the content
-```
+## **7. `git commit -m "Add index.html file"`**
 
-## Step 5: Add and Commit the File
+- **Commit** the staged changes with a commit message
+  
+- Creates a snapshot of the added file
+  
 
-```bash
-# Add the file to staging area
-git add index.html
+## **8. `git push dev_cluster master`**
 
-# Check the status to confirm file is staged
-git status
+- **Push** the "master" branch to the "dev_cluster" remote
+  
+- Sends the committed changes to the additional remote repository
+  
 
-# Commit the file with a descriptive message
-git commit -m "Add index.html file to datacenter branch"
+![alt text](image.png)
 
-# Verify the commit
-git log --oneline -n 3
-```
 
-## Step 6: Switch Back to Master Branch
+# This workflow is typical for:
 
-```bash
-# Switch back to master branch
-git checkout master
-
-# Verify you're on master branch
-git branch
-git status
-```
-
-## Step 7: Merge datacenter Branch into Master
-
-```bash
-# Merge the datacenter branch into master
-git merge datacenter
-
-# Verify the merge was successful
-git log --oneline -n 5
-ls -la  # Should now see index.html in master branch
-```
-
-## Step 8: Push Changes to Origin
-
-```bash
-# Push the master branch to origin
-git push origin master
-
-# Push the datacenter branch to origin
-git push origin datacenter
-
-# Verify both branches are pushed
-git branch -r  # Shows remote branches
-```
-
-## Complete Command Sequence (Alternative)
-
-If you prefer to run commands in sequence:
-
-```bash
-# Connect to storage server
-ssh natasha@ststor01.stratos.xfusioncorp.com
-
-# Navigate and setup
-cd /usr/src/kodekloudrepos/demo
-git checkout master  # Ensure we're on master
-git pull origin master  # Get latest changes
-
-# Create and work on datacenter branch
-git checkout -b datacenter
-cp /tmp/index.html .
-git add index.html
-git commit -m "Add index.html file to datacenter branch"
-
-# Merge back to master
-git checkout master
-git merge datacenter
-
-# Push both branches
-git push origin master
-git push origin datacenter
-```
-
-## Verification Commands
-
-```bash
-# Check repository status
-git status
-
-# View commit history
-git log --oneline --graph --all
-
-# List all branches (local and remote)
-git branch -a
-
-# Verify file exists in both branches
-git checkout master && ls -la index.html
-git checkout datacenter && ls -la index.html
-
-# Check remote repository status
-git remote -v
-git ls-remote origin
-```
-
-## Troubleshooting Tips
-
-### If you encounter permission issues:
-
-```bash
-# Check file permissions
-ls -la /tmp/index.html
-
-# If needed, change ownership (run as root or with sudo)
-sudo chown natasha:natasha /tmp/index.html
-```
-
-### If Git repository needs configuration:
-
-```bash
-# Set Git user configuration if needed
-git config user.name "natasha"
-git config user.email "natasha@stratos.xfusioncorp.com"
-
-# Or set globally
-git config --global user.name "natasha"
-git config --global user.email "natasha@stratos.xfusioncorp.com"
-```
-
-### If remote origin is not set:
-
-```bash
-# Check current remote
-git remote -v
-
-# Add origin if missing (replace with actual repo URL)
-git remote add origin <repository-url>
-```
-
-### If merge conflicts occur:
-
-```bash
-# Check conflict status
-git status
-
-# View conflicted files
-git diff
-
-# After resolving conflicts manually
-git add .
-git commit -m "Resolve merge conflicts"
-```
-
-## Expected Final State
-
-After completing all steps:
-
-1. ✅ `datacenter` branch created from `master`
-2. ✅ `/tmp/index.html` copied to repository
-3. ✅ File added and committed in `datacenter` branch
-4. ✅ `datacenter` branch merged back into `master`
-5. ✅ Both branches pushed to origin
-6. ✅ `index.html` file exists in both branches
-
-## Verification Commands to Confirm Success
-
-```bash
-# Final verification
-git branch -a  # Should show both local and remote branches
-git log --oneline --graph --all  # Should show merge history
-ls -la index.html  # File should exist
-git show HEAD  # Should show the merge commit or the file addition
-```
-
-The task should now be complete with the datacenter branch created, file added, merged back to master, and both branches pushed to origin!
+- This a  bare repository on the same machine Used for deployment or synchronization between environments
+ Pushing to multiple deployment environments, Possibly a staging or development cluster repository
+  
+- Setting up backup or mirror repositories
+  
+- Local development workflows with multiple target repositories
