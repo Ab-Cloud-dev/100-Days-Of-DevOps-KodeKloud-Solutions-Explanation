@@ -11,7 +11,9 @@
 
 ##Make sure you elevate to root and proceed with the below steps otherwise the system wouldn't accept it 
 
-## sudo su -
+```
+sudo su -
+```
 
 ## **1. `cd /usr/src/kodekloudrepos/blog/`**
 
