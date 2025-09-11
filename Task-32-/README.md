@@ -1,46 +1,46 @@
 # Task-27: Git Revert Some Changes
 
 ---
+The Nautilus application development team has been working on a project repository `/opt/beta.git`. This repo is cloned at `/usr/src/kodekloudrepos` on `storage server` in `Stratos DC`. They recently shared the following requirements with DevOps team:  
 
-The Nautilus application development team was working on a git repository `/usr/src/kodekloudrepos/ecommerce` present on `Storage server` in `Stratos DC`. However, they reported an issue with the recent commits being pushed to this repo. They have asked the DevOps team to revert repo HEAD to last commit. Below are more details about the task:
+One of the developers is working on `feature` branch and their work is still in progress, however there are some changes which have been pushed into the `master` branch, the developer now wants to `rebase` the `feature` branch with the `master` branch without loosing any data from the `feature` branch, also they don't want to add any `merge commit` by simply merging the `master` branch into the `feature` branch. Accomplish this task as per requirements mentioned.  
 
-1. In `/usr/src/kodekloudrepos/ecommerce` git repository, revert the latest commit `( HEAD )` to the previous commit (JFYI the previous commit hash should be with `initial commit` message ).
-
-2. Use `revert ecommerce` message (please use all small letters for commit message) for the new revert commit.
+Also remember to push your changes once done.
 ---
+
+
+git rebase command does. It rewrites history to create the illusion that you started your work on the latest version of the base branch (like master).
+
+✅ **When to use:**
+
+- You want a **clean, linear history**.
+- Before merging your feature branch into `main`.
+- On **local/private branches** that only you are working on (safe to rewrite).
+
+⚠️ Don’t rebase commits that have already been pushed and shared with others (unless you coordinate and use `--force`).
 
 # **Solution**
 
+**Perform the Rebase**  
+Rebase the feature branch onto the updated master branch. This will replay all commits from the feature branch on top of the latest master commit:
 
-- **Identify the Previous Commit Hash**:
-  
-  - Use `git log --oneline` to view the commit history and find the hash of the previous commit (the one before HEAD). The initial commit message should be visible here.
-- **Revert the Latest Commit**:
-  
-  - The `git revert` command creates a new commit that undoes the changes introduced by the specified commit (in this case, HEAD) 
-    
-  - Since you want to revert HEAD to the previous state, use:
-    
-    ```
-    git revert HEAD
-    ```
-    
-  - This will open an editor for the commit message, note that the default message will be "Revert '<original-commit-message>'". However, the user specifically requests a custom message: "revert ecommerce".
-    
-  
-- **Specify the Custom Commit Message**:
-    
-    - To use the exact message "revert ecommerce" (all lowercase), you can either:
-      
- ```
-git commit -m "revert ecommerce"
+
+Switch to the Feature Branch
+Now, switch to the feature branch that you want to rebase:
+
 ```
-### Verification:
+git checkout feature
+```
 
-- After executing, use `git log --oneline` to confirm that a new commit with the message "revert ecommerce" appears at the top, and the working directory reflects the state of the previous commit.
+```bash
+git rebase master
+```
 
-By following these steps, you will successfully revert the latest commit to the previous state with the required commit message.
+This command rewinds the feature branch to the common ancestor of both branches, applies the new commits from master, and then reapplies the commits from the feature branch one by one
 
-
+Since rebasing rewrites history, you must force-push the changes to the remote feature branch:
+```
+git push origin feature --force
+```
 
 ![alt text](image.png)
