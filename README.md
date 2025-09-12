@@ -30,10 +30,10 @@ For each day I try to cover:
 
 - View each day’s folder to see both the task and my working solution.  
 - Use the `README.md` to understand the concepts, not just the commands.
-- While using the solution from this Repo, in completing the task make sure to change name of the folder/service/ as per your solution as the the underlying task remains the same.
+- <u><mark>**While using the solution from this Repo, in completing the task make sure to change name of the folder/service/ as per your solution as the the underlying task remains the same.**</mark></u>.
 
 
-  ## 🗣️ Contributions, Feedback, & Improvement
+## 🗣️ Contributions, Feedback, & Improvement
 
 I welcome contributions:
 
