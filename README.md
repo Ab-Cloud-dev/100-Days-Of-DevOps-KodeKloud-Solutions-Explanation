@@ -1,7 +1,7 @@
 # 100-Days-Of-DevOps-KodeKloud-Solutions-Explanation
 
 
-A personal / community challenge to learn DevOps tools, concepts and best practices over 100 days. Built around the “100 Days of DevOps” track from KodeKloud. Each day I complete a task, document what I learned, and show how it applies in real-world environments.  
+A personal / community challenge to learn DevOps tools, concepts and best practices over 100 days. Built around the “[100 Days of DevOps](https://kodekloud.com/100-days-of-devops) track from KodeKloud. Each day I complete a task, document what I learned, and show how it applies in real-world environments.  
 
 ---
 
