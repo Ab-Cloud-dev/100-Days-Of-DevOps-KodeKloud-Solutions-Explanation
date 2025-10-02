@@ -60,4 +60,4 @@ kubectl get pods
 
 - Acessing the website
 
-![alt text](20250930-1943-07.6740567.gif)
+![alt text](Scene-gif.gif)
