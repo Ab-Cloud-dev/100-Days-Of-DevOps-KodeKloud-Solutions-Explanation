@@ -25,7 +25,7 @@ First, let's access Jenkins UI (click the Jenkins button) and login with:
 Navigate to **Manage Jenkins** → **Manage Plugins** → **Available plugins**
 
 Install these plugins:
-- **SSH Agent Plugin** (for SSH connections)
+- **SSH Agent ** (for SSH connections)
 - **Git Plugin** (should already be installed)
 - **Pipeline Plugin** (should already be installed)
 - **Credentials**
@@ -39,7 +39,7 @@ Install these plugins:
 
 
 
-### Step 2: Set Up SSH Credentials (Alternative Method)
+### Step 2: Set Up SSH Credentials
 
 If you prefer password-based authentication:
 
@@ -90,10 +90,11 @@ Now in Jenkins UI:
    - **Number of executors**: `1`
    - **Remote root directory**: `/var/www/html`
    - **Labels**: `ststor01`
-   - **Usage**: `Only build jobs with label expressions matching this node`
+   - **Usage**: `anything`
    - **Launch method**: `Launch agents via SSH`
-   - Select the Credentails
-   - **Host Key Verification Strategy**: `Non verifying Verification Strategy`
+        - **Host**: 172.16.238.15
+        - **Credentails** : Select the Storage Server Credentails
+        - **Host Key Verification Strategy**: `Non verifying Verification Strategy`
 
 5. Click **Save**
 
@@ -102,16 +103,15 @@ Now in Jenkins UI:
 ### Step 4: Verify Repository on Storage Server
 
 ```bash
-# From jump_host, verify the web_app repository
+# From jump_host, verify the repository link
 ssh natasha@ststor01
 cd /var/www/html
 
-# Check if web_app exists
-ls -la
 
-# If web_app repository exists, check its structure
-cd web_app
-ls -la
+# Check the git status
+git config --global --add safe.directory /var/www/html
+git branch -a
+git remote -v
 
 # Exit
 exit
