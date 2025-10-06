@@ -376,25 +376,37 @@
   </div>
 
   <script>
-    // Get GitHub username from URL
-    const getGitHubUsername = () => {
+    // Enhanced environment detection
+    const getEnvironment = () => {
       const hostname = window.location.hostname;
+      const protocol = window.location.protocol;
+
       if (hostname.includes('github.io')) {
-        return hostname.split('.')[0];
+        return {
+          type: 'github-pages',
+          username: hostname.split('.')[0]
+        };
+      } else if (protocol === 'file:') {
+        return { type: 'file' };
+      } else {
+        return { type: 'local-server' };
       }
-      return null;
     };
 
-    // Build proper GitHub raw URL
-    const buildRawUrl = (folder, filename) => {
-      const username = getGitHubUsername();
-      if (username) {
-        return `https://raw.githubusercontent.com/${username}/100-Days-Of-DevOps-KodeKloud-Solutions-Explanation/main/${encodeURIComponent(folder)}/${filename}`;
+    // Build proper URLs based on environment
+    const buildFileUrl = (folder, filename) => {
+      const env = getEnvironment();
+
+      if (env.type === 'github-pages') {
+        // Use GitHub raw content URL - don't encode the folder name as it breaks the path
+        return `https://raw.githubusercontent.com/${env.username}/100-Days-Of-DevOps-KodeKloud-Solutions-Explanation/main/${folder}/${filename}`;
+      } else {
+        // Local development (server or file protocol)
+        return `${folder}/${filename}`;
       }
-      return `${folder}/${filename}`;
     };
 
-    // Task data structure
+    // Task data structure (unchanged)
     const tasks = {
       linux: [
         'Task-01- Linux User Setup with Non-Interactive Shell',
@@ -512,13 +524,13 @@
       ]
     };
 
-    // Render tasks
+    // Render tasks (unchanged)
     Object.keys(tasks).forEach(category => {
       const container = document.getElementById(`${category}-tasks`);
       tasks[category].forEach((folder, index) => {
         const taskNum = folder.match(/\d+/)[0];
         const title = folder.replace(/Task-\d+-?\s*/, '').trim();
-        
+
         const taskDiv = document.createElement('div');
         taskDiv.className = 'task';
         taskDiv.dataset.folder = folder;
@@ -530,17 +542,19 @@
       });
     });
 
-    // Modal functionality
+    // Modal elements
     const modal = document.getElementById('readmeModal');
     const modalTitle = document.getElementById('modal-title');
     const modalBody = document.getElementById('modal-body');
     const closeBtn = document.querySelector('.close');
 
-    // Simple markdown to HTML
+    // Enhanced markdown rendering
     const renderMarkdown = (md) => {
-      // First, handle code blocks (before other processing)
-      md = md.replace(/```([\s\S]*?)```/gim, (match, code) => {
-        return `<pre><code>${code.trim()}</code></pre>`;
+      // Preserve code blocks by replacing them with placeholders
+      const codeBlocks = [];
+      md = md.replace(/```([\s\S]*?)```/gm, (match, code, index) => {
+        codeBlocks.push(`<pre><code>${escapeHtml(code.trim())}</code></pre>`);
+        return `__CODE_BLOCK_${codeBlocks.length - 1}__`;
       });
 
       // Split into lines for processing
@@ -548,28 +562,52 @@
       const html = [];
       let inList = false;
       let listItems = [];
+      let inBlockquote = false;
+      let blockquoteLines = [];
 
       for (let i = 0; i < lines.length; i++) {
-        let line = lines[i];
+        let line = lines[i].trim();
 
-        // Skip empty lines
-        if (line.trim() === '') {
+        // Handle empty lines
+        if (line === '') {
           if (inList) {
             html.push('<ul>' + listItems.join('') + '</ul>');
             listItems = [];
             inList = false;
           }
+          if (inBlockquote) {
+            html.push('<blockquote>' + blockquoteLines.join('<br>') + '</blockquote>');
+            blockquoteLines = [];
+            inBlockquote = false;
+          }
+          html.push('<br>');
           continue;
         }
 
-        // Headers
+        // Handle blockquotes
+        if (line.startsWith('> ')) {
+          if (inList) {
+            html.push('<ul>' + listItems.join('') + '</ul>');
+            listItems = [];
+            inList = false;
+          }
+          blockquoteLines.push(processInline(line.substring(2)));
+          inBlockquote = true;
+          continue;
+        } else if (inBlockquote) {
+          html.push('<blockquote>' + blockquoteLines.join('<br>') + '</blockquote>');
+          blockquoteLines = [];
+          inBlockquote = false;
+        }
+
+        // Handle headers
         if (line.match(/^### /)) {
           if (inList) {
             html.push('<ul>' + listItems.join('') + '</ul>');
             listItems = [];
             inList = false;
           }
-          html.push('<h3>' + line.replace(/^### /, '') + '</h3>');
+          html.push('<h3>' + processInline(line.replace(/^### /, '')) + '</h3>');
           continue;
         }
         if (line.match(/^## /)) {
@@ -578,7 +616,7 @@
             listItems = [];
             inList = false;
           }
-          html.push('<h2>' + line.replace(/^## /, '') + '</h2>');
+          html.push('<h2>' + processInline(line.replace(/^## /, '')) + '</h2>');
           continue;
         }
         if (line.match(/^# /)) {
@@ -587,12 +625,12 @@
             listItems = [];
             inList = false;
           }
-          html.push('<h1>' + line.replace(/^# /, '') + '</h1>');
+          html.push('<h1>' + processInline(line.replace(/^# /, '')) + '</h1>');
           continue;
         }
 
-        // Code blocks (already processed)
-        if (line.includes('<pre><code>')) {
+        // Handle code block placeholders
+        if (line.includes('__CODE_BLOCK_')) {
           if (inList) {
             html.push('<ul>' + listItems.join('') + '</ul>');
             listItems = [];
@@ -602,7 +640,7 @@
           continue;
         }
 
-        // Lists
+        // Handle lists
         if (line.match(/^\s*[-*+]\s+/) || line.match(/^\s*\d+\.\s+/)) {
           const content = line.replace(/^\s*[-*+\d.]+\s+/, '');
           listItems.push('<li>' + processInline(content) + '</li>');
@@ -610,7 +648,7 @@
           continue;
         }
 
-        // Regular paragraphs
+        // Handle regular paragraphs
         if (inList) {
           html.push('<ul>' + listItems.join('') + '</ul>');
           listItems = [];
@@ -619,68 +657,123 @@
         html.push('<p>' + processInline(line) + '</p>');
       }
 
-      // Close any remaining list
+      // Close any remaining structures
       if (inList) {
         html.push('<ul>' + listItems.join('') + '</ul>');
       }
+      if (inBlockquote) {
+        html.push('<blockquote>' + blockquoteLines.join('<br>') + '</blockquote>');
+      }
 
-      return html.join('\n');
+      // Restore code blocks
+      let result = html.join('\n');
+      codeBlocks.forEach((block, index) => {
+        result = result.replace(`__CODE_BLOCK_${index}__`, block);
+      });
+
+      return result;
     };
 
-    // Process inline markdown (bold, italic, links, images, code)
+    // Escape HTML characters
+    const escapeHtml = (text) => {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    };
+
+    // Process inline markdown elements
     const processInline = (text) => {
-      // Images (before links!)
-      text = text.replace(/!\[([^\]]*)\]\(([^\)]+)\)/g, '<img src="$2" alt="$1" />');
-      
+      // Images (must come before links!)
+      text = text.replace(/!\[([^\]]*)\]\(([^\)]+)\)/g, '<img src="$2" alt="$1" style="max-width: 100%; height: auto;" />');
+
       // Links
       text = text.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
-      
-      // Inline code
-      text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
-      
+
+      // Inline code (preserve content)
+      text = text.replace(/`([^`]+)`/g, (match, code) => {
+        return `<code>${escapeHtml(code)}</code>`;
+      });
+
       // Bold
       text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-      
+
       // Italic
       text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
-      
+
       return text;
     };
 
-    // Load task content
+    // Enhanced task loading with better error handling
     const loadTask = async (folder) => {
+      const env = getEnvironment();
+
       modal.style.display = 'block';
       modalTitle.textContent = folder.replace(/Task-\d+-?\s*/, '').trim();
-      modalBody.innerHTML = '<div class="loading"><div class="loading-spinner"></div>Loading...</div>';
+      modalBody.innerHTML = `
+        <div class="loading">
+          <div class="loading-spinner"></div>
+          Loading... (Environment: ${env.type})
+        </div>
+      `;
 
       try {
-        const readmeUrl = buildRawUrl(folder, 'README.md');
+        const readmeUrl = buildFileUrl(folder, 'README.md');
+        console.log('Attempting to load:', readmeUrl); // Debug log
+
         const response = await fetch(readmeUrl);
-        
+
         if (!response.ok) {
-          throw new Error(`README.md not found at ${readmeUrl}`);
+          throw new Error(`README.md not found (${response.status})`);
         }
 
         let content = await response.text();
+        console.log('Content loaded:', content.length, 'characters'); // Debug log
+
         let html = renderMarkdown(content);
-        
-        // Fix image paths in the rendered HTML
+
+        // Fix relative image paths in the rendered HTML
         html = html.replace(/<img src="(?!http)([^"]+)"/g, (match, src) => {
-          const imgUrl = buildRawUrl(folder, src);
+          // Remove leading ./ if present
+          const cleanSrc = src.replace(/^\.\//, '');
+          const imgUrl = buildFileUrl(folder, cleanSrc);
           return `<img src="${imgUrl}"`;
         });
 
         modalBody.innerHTML = html;
+
       } catch (error) {
-        modalBody.innerHTML = `
-          <div class="error-message">
-            <strong>Error:</strong> ${error.message}
-          </div>
-        `;
+        console.error('Error loading task:', error); // Debug log
+
+        let errorMessage = `<div class="error-message"><strong>Error:</strong> ${error.message}<br><br>`;
+
+        if (env.type === 'file') {
+          errorMessage += `
+            <strong>Solution:</strong> You're opening this as a file:// URL. Please use a web server instead:<br>
+            <code>python -m http.server 8000</code><br>
+            Then visit: <code>http://localhost:8000/index-3.html</code>
+          `;
+        } else if (env.type === 'local-server') {
+          errorMessage += `
+            <strong>Debug info:</strong><br>
+            - Environment: ${env.type}<br>
+            - Trying to load: ${buildFileUrl(folder, 'README.md')}<br>
+            - Make sure the folder "${folder}" exists with a README.md file
+          `;
+        } else {
+          errorMessage += `
+            <strong>Debug info:</strong><br>
+            - Environment: GitHub Pages<br>
+            - Username: ${env.username}<br>
+            - URL: ${buildFileUrl(folder, 'README.md')}
+          `;
+        }
+
+        errorMessage += '</div>';
+        modalBody.innerHTML = errorMessage;
       }
     };
 
-    // Event listeners
+    // Event listeners (unchanged)
     document.querySelectorAll('.task').forEach(task => {
       task.addEventListener('click', () => {
         loadTask(task.dataset.folder);
@@ -702,6 +795,11 @@
         modal.style.display = 'none';
       }
     });
+
+    // Debug information in console
+    console.log('Environment detected:', getEnvironment());
+    console.log('Tasks loaded:', Object.keys(tasks).map(k => `${k}: ${tasks[k].length}`));
   </script>
+
 </body>
 </html>
