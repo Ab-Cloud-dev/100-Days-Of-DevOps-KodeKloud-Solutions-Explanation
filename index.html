@@ -68,6 +68,57 @@
       margin-bottom: 1.5rem;
     }
 
+    h3 {
+      font-size: 1.3rem;
+      font-weight: 500;
+    }
+
+    p, li {
+      color: #374151;
+      margin-bottom: 1rem;
+    }
+
+    ul, ol {
+      margin-left: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    code {
+      background: #f3f4f6;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      font-family: "Fira Code", Consolas, monospace;
+      font-size: 0.9rem;
+      color: #dc2626;
+    }
+
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: #1d4ed8;
+      text-decoration: underline;
+    }
+
+    .highlight-box {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-left: 4px solid #f59e0b;
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin: 2rem 0;
+    }
+
+    .highlight-box strong {
+      color: #92400e;
+    }
+
     .stats-section {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -88,6 +139,19 @@
       font-size: 2.5rem;
       font-weight: 700;
       display: block;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-top: 0.5rem;
+    }
+
+    .section-divider {
+      margin: 4rem 0;
+      border: none;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
     }
 
     .task-index-header {
@@ -126,13 +190,40 @@
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease;
       border-left: 4px solid #e5e7eb;
-      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .task::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(147, 51, 234, 0.05) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
     .task:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
       border-left-color: #3b82f6;
+    }
+
+    .task:hover::before {
+      opacity: 1;
+    }
+
+    .task a {
+      text-decoration: none;
+      color: #111827;
+      font-weight: 600;
+      display: block;
+      position: relative;
+      z-index: 1;
+      line-height: 1.4;
     }
 
     .task-number {
@@ -145,155 +236,75 @@
       color: #111827;
       font-size: 1rem;
       margin-top: 0.25rem;
-      font-weight: 600;
-      line-height: 1.4;
     }
 
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0,0,0,0.8);
-      overflow-y: auto;
-    }
+    /* Category-specific colors */
+    .linux .task { border-left-color: #10b981; }
+    .linux .task:hover::before { background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%); }
 
-    .modal-content {
-      background-color: white;
-      margin: 2rem auto;
-      padding: 0;
-      border-radius: 15px;
-      width: 95%;
-      max-width: 900px;
-      max-height: 90vh;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    }
+    .git .task { border-left-color: #f59e0b; }
+    .git .task:hover::before { background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.1) 100%); }
 
-    .modal-header {
-      background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+    .docker .task { border-left-color: #3b82f6; }
+    .docker .task:hover::before { background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%); }
+
+    .kubernetes .task { border-left-color: #8b5cf6; }
+    .kubernetes .task:hover::before { background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%); }
+
+    .jenkins .task { border-left-color: #ef4444; }
+    .jenkins .task:hover::before { background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.1) 100%); }
+
+    .ansible .task { border-left-color: #ec4899; }
+    .ansible .task:hover::before { background: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(219, 39, 119, 0.1) 100%); }
+
+    .terraform .task { border-left-color: #06b6d4; }
+    .terraform .task:hover::before { background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(8, 145, 178, 0.1) 100%); }
+
+    footer {
+      background: #1f2937;
       color: white;
-      padding: 1.5rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .modal-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin: 0;
-    }
-
-    .close {
-      color: white;
-      font-size: 28px;
-      font-weight: bold;
-      cursor: pointer;
-      opacity: 0.8;
-      transition: opacity 0.2s ease;
-    }
-
-    .close:hover {
-      opacity: 1;
-    }
-
-    .modal-body {
-      padding: 2rem;
-      max-height: calc(90vh - 100px);
-      overflow-y: auto;
-    }
-
-    .readme-content {
-      line-height: 1.7;
-    }
-
-    .readme-content h1,
-    .readme-content h2,
-    .readme-content h3 {
-      color: #1f2937;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .readme-content h1 {
-      font-size: 2rem;
-      border-bottom: 2px solid #e5e7eb;
-      padding-bottom: 0.5rem;
-    }
-
-    .readme-content img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      margin: 1.5rem 0;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      cursor: pointer;
-    }
-
-    .readme-content pre {
-      background: #f8f9fa;
-      padding: 1.5rem;
-      border-radius: 8px;
-      overflow-x: auto;
-      border-left: 4px solid #3b82f6;
-      margin: 1.5rem 0;
-    }
-
-    .readme-content code {
-      background: #f3f4f6;
-      padding: 0.2rem 0.4rem;
-      border-radius: 4px;
-      font-size: 0.9rem;
-      font-family: "Fira Code", Consolas, monospace;
-    }
-
-    .readme-content pre code {
-      background: none;
-      padding: 0;
-    }
-
-    .loading {
       text-align: center;
-      padding: 3rem;
-      color: #6b7280;
+      padding: 2rem;
+      margin-top: 4rem;
     }
 
-    .loading-spinner {
-      border: 3px solid #f3f4f6;
-      border-top: 3px solid #3b82f6;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 1rem auto;
+    .footer-content {
+      max-width: 600px;
+      margin: 0 auto;
     }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .social-links {
+      margin-top: 1rem;
     }
 
-    .error-message {
-      background: #fef2f2;
-      border: 1px solid #fecaca;
-      color: #991b1b;
-      padding: 1rem;
-      border-radius: 8px;
-      margin: 1rem 0;
+    .social-links a {
+      color: #9ca3af;
+      margin: 0 1rem;
+      transition: color 0.2s ease;
+    }
+
+    .social-links a:hover {
+      color: white;
     }
 
     @media (max-width: 768px) {
       .hero-section h1 {
         font-size: 2rem;
       }
+
+      .hero-section {
+        padding: 3rem 1rem;
+      }
+
       .content {
         padding: 2rem;
         margin: 0 1rem 2rem 1rem;
       }
+
+      .container {
+        padding: 0 1rem;
+      }
+
       .grid {
         grid-template-columns: 1fr;
       }
@@ -301,9 +312,10 @@
   </style>
 </head>
 <body>
+
   <div class="hero-section">
-    <h1>100 Days of DevOps</h1>
-    <p class="subtitle">KodeKloud Solutions & Explanations</p>
+    <h1>🚀 100 Days of DevOps</h1>
+    <p class="subtitle">KodeKloud Solutions & Explanations - A comprehensive journey through DevOps tools, concepts and best practices</p>
   </div>
 
   <div class="container">
@@ -311,400 +323,218 @@
       <div class="stats-section">
         <div class="stat-card">
           <span class="stat-number">100</span>
-          <div>Days Completed</div>
+          <div class="stat-label">Days Completed</div>
         </div>
         <div class="stat-card">
           <span class="stat-number">7</span>
-          <div>Technologies</div>
+          <div class="stat-label">Technologies</div>
         </div>
+        <div class="stat-card">
+          <span class="stat-number">∞</span>
+          <div class="stat-label">Learning</div>
+        </div>
+      </div>
+
+      <h2>🎯 What is this</h2>
+      <p>A personal / community challenge to learn DevOps tools, concepts and best practices over 100 days. Built around the <a href="https://kodekloud.com/100-days-of-devops" target="_blank">100 Days of DevOps</a> track from KodeKloud.</p>
+
+      <ul>
+        <li><strong>Purpose:</strong> To build up hands-on experience in DevOps through small, daily tasks.</li>
+        <li><strong>Source:</strong> Based on the <a href="https://kodekloud.com/100-days-of-devops" target="_blank">100 Days of DevOps</a> track from KodeKloud.</li>
+        <li><strong>Goal:</strong> By the end of Day 100, I want to have a portfolio of real DevOps workflows, tools, scripts, etc., plus explanations of how they are used in professional settings.</li>
+      </ul>
+
+      <h3>📁 Each Task Contains:</h3>
+      <ol>
+        <li>The problem/task statement or link</li>
+        <li>My solution (scripts, config, code, manifests, etc.)</li>
+        <li>Notes / reflections, including how the task connects to real-world usage</li>
+      </ol>
+
+      <hr class="section-divider">
+
+      <h2>📝 Documentation Approach</h2>
+      <ol>
+        <li><strong>Task description</strong> — what was asked</li>
+        <li><strong>Solution</strong> — code / scripts / configs</li>
+        <li><strong>Explanation / Walkthrough</strong> — step-by-step what I did and why</li>
+      </ol>
+
+      <div class="highlight-box">
+        <strong>⚠️ Important Note:</strong> While using the solution from this repo, change the folder/service names as per your own setup since the underlying task remains the same.
+      </div>
+
+      <h2>🤝 Contributions & Feedback</h2>
+      <ul>
+        <li>If you see something I can improve, feel free to open a Pull Request.</li>
+        <li>If there are typos, mistakes, or better ways to do a task, I welcome suggestions.</li>
+        <li>⭐ Star the repo if you find this useful or want to track the progress.</li>
+      </ul>
+    </div>
+
+    <h2 class="task-index-header">📚 Complete Task Index</h2>
+
+    <!-- Linux & System Administration -->
+    <div class="category-section linux">
+      <div class="category-title">🐧 Linux & System Administration (Tasks 1-20)</div>
+      <div class="grid">
+        <div class='task'><a href='Task-01- Linux User Setup with Non-Interactive Shell/'><span class="task-number">Task 001</span><div class="task-title">Linux User Setup with Non-Interactive Shell</div></a></div>
+        <div class='task'><a href='Task-02-Temporary User Setup with Expiry/'><span class="task-number">Task 002</span><div class="task-title">Temporary User Setup with Expiry</div></a></div>
+        <div class='task'><a href='Task-03-Secure Root SSH Access/'><span class="task-number">Task 003</span><div class="task-title">Secure Root SSH Access</div></a></div>
+        <div class='task'><a href='Task-04-Script Execution Permission/'><span class="task-number">Task 004</span><div class="task-title">Script Execution Permission</div></a></div>
+        <div class='task'><a href='Task-05-SElinux Installation and Configuration/'><span class="task-number">Task 005</span><div class="task-title">SELinux Installation and Configuration</div></a></div>
+        <div class='task'><a href='Task-06-Create a Cron Job/'><span class="task-number">Task 006</span><div class="task-title">Create a Cron Job</div></a></div>
+        <div class='task'><a href='Task-07- Linux SSH Authentication/'><span class="task-number">Task 007</span><div class="task-title">Linux SSH Authentication</div></a></div>
+        <div class='task'><a href='Task-08-Install Ansible Via Pip/'><span class="task-number">Task 008</span><div class="task-title">Install Ansible Via Pip</div></a></div>
+        <div class='task'><a href='Task-09-MariaDB Troubleshooting/'><span class="task-number">Task 009</span><div class="task-title">MariaDB Troubleshooting</div></a></div>
+        <div class='task'><a href='Task-10-Linux Bash Scripts/'><span class="task-number">Task 010</span><div class="task-title">Linux Bash Scripts</div></a></div>
+        <div class='task'><a href='Task-11-Install and Configure Tomcat Server/'><span class="task-number">Task 011</span><div class="task-title">Install and Configure Tomcat Server</div></a></div>
+        <div class='task'><a href='Task-12-Linux Network Services/'><span class="task-number">Task 012</span><div class="task-title">Linux Network Services</div></a></div>
+        <div class='task'><a href='Task-13- IPtables Installation And Configuration/'><span class="task-number">Task 013</span><div class="task-title">IPtables Installation And Configuration</div></a></div>
+        <div class='task'><a href='Task-14- Linux Process Troubleshooting/'><span class="task-number">Task 014</span><div class="task-title">Linux Process Troubleshooting</div></a></div>
+        <div class='task'><a href='Task-15-Setup SSL for Nginx/'><span class="task-number">Task 015</span><div class="task-title">Setup SSL for Nginx</div></a></div>
+        <div class='task'><a href='Task-16-Install and Configure Nginx as an LBR/'><span class="task-number">Task 016</span><div class="task-title">Install and Configure Nginx as Load Balancer</div></a></div>
+        <div class='task'><a href='Task-17-Install and Configure PostgreSQL/'><span class="task-number">Task 017</span><div class="task-title">Install and Configure PostgreSQL</div></a></div>
+        <div class='task'><a href='Task-18-Configure LAMP server/'><span class="task-number">Task 018</span><div class="task-title">Configure LAMP Server</div></a></div>
+        <div class='task'><a href='Task-19-Install and Configure Web Application/'><span class="task-number">Task 019</span><div class="task-title">Install and Configure Web Application</div></a></div>
+        <div class='task'><a href='Task-20-Configure Nginx + PHP-FPM Using Unix Sock/'><span class="task-number">Task 020</span><div class="task-title">Configure Nginx + PHP-FPM Using Unix Socket</div></a></div>
       </div>
     </div>
 
-    <h2 class="task-index-header">Complete Task Index</h2>
-
-    <div class="category-section">
-      <div class="category-title">Linux & System Administration (Tasks 1-20)</div>
-      <div class="grid" id="linux-tasks"></div>
+    <!-- Git Version Control -->
+    <div class="category-section git">
+      <div class="category-title">📋 Git Version Control (Tasks 21-34)</div>
+      <div class="grid">
+        <div class='task'><a href='Task-21- Set Up Git Repository on Storage Server/'><span class="task-number">Task 021</span><div class="task-title">Set Up Git Repository on Storage Server</div></a></div>
+        <div class='task'><a href='Task-22-Clone Git Repository on Storage Server/'><span class="task-number">Task 022</span><div class="task-title">Clone Git Repository on Storage Server</div></a></div>
+        <div class='task'><a href='Task-23-Fork a Git Repository/'><span class="task-number">Task 023</span><div class="task-title">Fork a Git Repository</div></a></div>
+        <div class='task'><a href='Task-24-Git Create Branches/'><span class="task-number">Task 024</span><div class="task-title">Git Create Branches</div></a></div>
+        <div class='task'><a href='Task-25-Git Merge Branches/'><span class="task-number">Task 025</span><div class="task-title">Git Merge Branches</div></a></div>
+        <div class='task'><a href='Task-26-Git Manage Remotes/'><span class="task-number">Task 026</span><div class="task-title">Git Manage Remotes</div></a></div>
+        <div class='task'><a href='Task-27-Git Revert Some Changes/'><span class="task-number">Task 027</span><div class="task-title">Git Revert Some Changes</div></a></div>
+        <div class='task'><a href='Task-28- Git Cherry Pick/'><span class="task-number">Task 028</span><div class="task-title">Git Cherry Pick</div></a></div>
+        <div class='task'><a href='Task-29-Manage Git Pull Requests/'><span class="task-number">Task 029</span><div class="task-title">Manage Git Pull Requests</div></a></div>
+        <div class='task'><a href='Task-30-Git hard reset/'><span class="task-number">Task 030</span><div class="task-title">Git Hard Reset</div></a></div>
+        <div class='task'><a href='Task-31-Git Stash/'><span class="task-number">Task 031</span><div class="task-title">Git Stash</div></a></div>
+        <div class='task'><a href='Task-32-Git Rebase/'><span class="task-number">Task 032</span><div class="task-title">Git Rebase</div></a></div>
+        <div class='task'><a href='Task-33-Resolve Git Merge Conflicts/'><span class="task-number">Task 033</span><div class="task-title">Resolve Git Merge Conflicts</div></a></div>
+        <div class='task'><a href='Task-34-Git Hook/'><span class="task-number">Task 034</span><div class="task-title">Git Hooks</div></a></div>
+      </div>
     </div>
 
-    <div class="category-section">
-      <div class="category-title">Git Version Control (Tasks 21-34)</div>
-      <div class="grid" id="git-tasks"></div>
+    <!-- Docker Containerization -->
+    <div class="category-section docker">
+      <div class="category-title">🐳 Docker Containerization (Tasks 35-47)</div>
+      <div class="grid">
+        <div class='task'><a href='Task-35-Install Docker Packages and Start Docker Service Start/'><span class="task-number">Task 035</span><div class="task-title">Install Docker Packages and Start Service</div></a></div>
+        <div class='task'><a href='Task-36-Deploy Nginx Container on Application Server/'><span class="task-number">Task 036</span><div class="task-title">Deploy Nginx Container on Application Server</div></a></div>
+        <div class='task'><a href='Task-37-Copy File to Docker Container/'><span class="task-number">Task 037</span><div class="task-title">Copy File to Docker Container</div></a></div>
+        <div class='task'><a href='Task-38-Pull Docker Images copy/'><span class="task-number">Task 038</span><div class="task-title">Pull Docker Images</div></a></div>
+        <div class='task'><a href='Task-39- Create a Docker Image From Container/'><span class="task-number">Task 039</span><div class="task-title">Create a Docker Image From Container</div></a></div>
+        <div class='task'><a href='Task-40-Docker EXEC Operations/'><span class="task-number">Task 040</span><div class="task-title">Docker EXEC Operations</div></a></div>
+        <div class='task'><a href='Task-41-Create Docker File/'><span class="task-number">Task 041</span><div class="task-title">Create Docker File</div></a></div>
+        <div class='task'><a href='Task-42- Create a Docker Network/'><span class="task-number">Task 042</span><div class="task-title">Create a Docker Network</div></a></div>
+        <div class='task'><a href='Task-43-Docker Ports Mapping/'><span class="task-number">Task 043</span><div class="task-title">Docker Ports Mapping</div></a></div>
+        <div class='task'><a href='Task-44- Write a Docker Compose File/'><span class="task-number">Task 044</span><div class="task-title">Write a Docker Compose File</div></a></div>
+        <div class='task'><a href='Task-45- Resolve Dockerfile Issues/'><span class="task-number">Task 045</span><div class="task-title">Resolve Dockerfile Issues</div></a></div>
+        <div class='task'><a href='Task-46-Deploy App Container/'><span class="task-number">Task 046</span><div class="task-title">Deploy App Container</div></a></div>
+        <div class='task'><a href='Task-47-Docker Python App/'><span class="task-number">Task 047</span><div class="task-title">Docker Python App</div></a></div>
+      </div>
     </div>
 
-    <div class="category-section">
-      <div class="category-title">Docker Containerization (Tasks 35-47)</div>
-      <div class="grid" id="docker-tasks"></div>
+    <!-- Kubernetes Orchestration -->
+    <div class="category-section kubernetes">
+      <div class="category-title">☸️ Kubernetes Orchestration (Tasks 48-67)</div>
+      <div class="grid">
+        <div class='task'><a href='Task-48-Deploy Pods in Kubernetes Cluster/'><span class="task-number">Task 048</span><div class="task-title">Deploy Pods in Kubernetes Cluster</div></a></div>
+        <div class='task'><a href='Task-49-Deploy Applications with Kubernetes Deployments/'><span class="task-number">Task 049</span><div class="task-title">Deploy Applications with Kubernetes Deployments</div></a></div>
+        <div class='task'><a href='Task-50-Set Resource Limits in Kubernetes Pods/'><span class="task-number">Task 050</span><div class="task-title">Set Resource Limits in Kubernetes Pods</div></a></div>
+        <div class='task'><a href='Task-51-Execute Rolling Updates in Kubernetes/'><span class="task-number">Task 051</span><div class="task-title">Execute Rolling Updates in Kubernetes</div></a></div>
+        <div class='task'><a href='Task-52-Revert Deployment to Previous Version in Kubernetes/'><span class="task-number">Task 052</span><div class="task-title">Revert Deployment to Previous Version</div></a></div>
+        <div class='task'><a href='Task-53-Resolve VolumeMounts Issue in Kubernetes/'><span class="task-number">Task 053</span><div class="task-title">Resolve VolumeMounts Issue in Kubernetes</div></a></div>
+        <div class='task'><a href='Task-54-Kubernetes Shared Volumes/'><span class="task-number">Task 054</span><div class="task-title">Kubernetes Shared Volumes</div></a></div>
+        <div class='task'><a href='Task-55-Kubernetes Sidecar Containers/'><span class="task-number">Task 055</span><div class="task-title">Kubernetes Sidecar Containers</div></a></div>
+        <div class='task'><a href='Task-56-Deploy Nginx Web Server on Kubernetes Cluster/'><span class="task-number">Task 056</span><div class="task-title">Deploy Nginx Web Server on Kubernetes</div></a></div>
+        <div class='task'><a href='Task-57-Print Environment Variables/'><span class="task-number">Task 057</span><div class="task-title">Print Environment Variables</div></a></div>
+        <div class='task'><a href='Task-58-Deploy Grafana on Kubernetes Cluster/'><span class="task-number">Task 058</span><div class="task-title">Deploy Grafana on Kubernetes Cluster</div></a></div>
+        <div class='task'><a href='Task-59-Troubleshoot Deployment issues in Kubernetes/'><span class="task-number">Task 059</span><div class="task-title">Troubleshoot Deployment Issues in Kubernetes</div></a></div>
+        <div class='task'><a href='Task-60-Persistent Volumes in Kubernetes/'><span class="task-number">Task 060</span><div class="task-title">Persistent Volumes in Kubernetes</div></a></div>
+        <div class='task'><a href='Task-61- Init Containers in Kubernetes/'><span class="task-number">Task 061</span><div class="task-title">Init Containers in Kubernetes</div></a></div>
+        <div class='task'><a href='Task-62- Manage Secrets in Kubernetes/'><span class="task-number">Task 062</span><div class="task-title">Manage Secrets in Kubernetes</div></a></div>
+        <div class='task'><a href='Task-63-Deploy Iron Gallery App on Kubernetes/'><span class="task-number">Task 063</span><div class="task-title">Deploy Iron Gallery App on Kubernetes</div></a></div>
+        <div class='task'><a href='Task-64-Fix Python App Deployed on Kubernetes Cluster/'><span class="task-number">Task 064</span><div class="task-title">Fix Python App Deployed on Kubernetes</div></a></div>
+        <div class='task'><a href='Task-65-Deploy Redis Deployment on Kubernetes/'><span class="task-number">Task 065</span><div class="task-title">Deploy Redis Deployment on Kubernetes</div></a></div>
+        <div class='task'><a href='Task-66- Deploy MySQL on Kubernetes/'><span class="task-number">Task 066</span><div class="task-title">Deploy MySQL on Kubernetes</div></a></div>
+        <div class='task'><a href='Task-67- Deploy Guest Book App on Kubernetes/'><span class="task-number">Task 067</span><div class="task-title">Deploy Guest Book App on Kubernetes</div></a></div>
+      </div>
     </div>
 
-    <div class="category-section">
-      <div class="category-title">Kubernetes Orchestration (Tasks 48-67)</div>
-      <div class="grid" id="kubernetes-tasks"></div>
+    <!-- Jenkins CI/CD -->
+    <div class="category-section jenkins">
+      <div class="category-title">🔧 Jenkins CI/CD (Tasks 68-81)</div>
+      <div class="grid">
+        <div class='task'><a href='Task-68-Set Up Jenkins Server/'><span class="task-number">Task 068</span><div class="task-title">Set Up Jenkins Server</div></a></div>
+        <div class='task'><a href='Task-69-Install Jenkins Plugins/'><span class="task-number">Task 069</span><div class="task-title">Install Jenkins Plugins</div></a></div>
+        <div class='task'><a href='Task-70-Configure Jenkins User Access/'><span class="task-number">Task 070</span><div class="task-title">Configure Jenkins User Access</div></a></div>
+        <div class='task'><a href='Task-71-Configure Jenkins Job for Package Installation/'><span class="task-number">Task 071</span><div class="task-title">Configure Jenkins Job for Package Installation</div></a></div>
+        <div class='task'><a href='Task-72-Jenkins Parameterized Builds/'><span class="task-number">Task 072</span><div class="task-title">Jenkins Parameterized Builds</div></a></div>
+        <div class='task'><a href='Task-73- Jenkins Scheduled Jobs/'><span class="task-number">Task 073</span><div class="task-title">Jenkins Scheduled Jobs</div></a></div>
+        <div class='task'><a href='Task-74-Jenkins Database Backup Job/'><span class="task-number">Task 074</span><div class="task-title">Jenkins Database Backup Job</div></a></div>
+        <div class='task'><a href='Task-75- Jenkins Slave Nodes/'><span class="task-number">Task 075</span><div class="task-title">Jenkins Slave Nodes</div></a></div>
+        <div class='task'><a href='Task-76-Jenkins Project Security/'><span class="task-number">Task 076</span><div class="task-title">Jenkins Project Security</div></a></div>
+        <div class='task'><a href='Task-77-Jenkins Deploy Pipeline/'><span class="task-number">Task 077</span><div class="task-title">Jenkins Deploy Pipeline</div></a></div>
+        <div class='task'><a href='Task-78-Jenkins Conditional Pipeline/'><span class="task-number">Task 078</span><div class="task-title">Jenkins Conditional Pipeline</div></a></div>
+        <div class='task'><a href='Task-79-Jenkins Deployment Job/'><span class="task-number">Task 079</span><div class="task-title">Jenkins Deployment Job</div></a></div>
+        <div class='task'><a href='Task-80-Jenkins Chained Builds/'><span class="task-number">Task 080</span><div class="task-title">Jenkins Chained Builds</div></a></div>
+        <div class='task'><a href='Task-81-Jenkins Multistage Pipeline/'><span class="task-number">Task 081</span><div class="task-title">Jenkins Multistage Pipeline</div></a></div>
+      </div>
     </div>
 
-    <div class="category-section">
-      <div class="category-title">Jenkins CI/CD (Tasks 68-81)</div>
-      <div class="grid" id="jenkins-tasks"></div>
+    <!-- Ansible Configuration Management -->
+    <div class="category-section ansible">
+      <div class="category-title">🔮 Ansible Configuration Management (Tasks 82-93)</div>
+      <div class="grid">
+        <div class='task'><a href='Task-82-Create Ansible Inventory for App Server Testing/'><span class="task-number">Task 082</span><div class="task-title">Create Ansible Inventory for App Server Testing</div></a></div>
+        <div class='task'><a href='Task-83-Troubleshoot and Create Ansible Playbook/'><span class="task-number">Task 083</span><div class="task-title">Troubleshoot and Create Ansible Playbook</div></a></div>
+        <div class='task'><a href='Task-84-Copy Data to App Servers using Ansible/'><span class="task-number">Task 084</span><div class="task-title">Copy Data to App Servers using Ansible</div></a></div>
+        <div class='task'><a href='Task-85-Create Files on App Servers using Ansible/'><span class="task-number">Task 085</span><div class="task-title">Create Files on App Servers using Ansible</div></a></div>
+        <div class='task'><a href='Task-86-Ansible Ping Module Usage/'><span class="task-number">Task 086</span><div class="task-title">Ansible Ping Module Usage</div></a></div>
+        <div class='task'><a href='Task-87-Ansible Install Package/'><span class="task-number">Task 087</span><div class="task-title">Ansible Install Package</div></a></div>
+        <div class='task'><a href='Task-88- Ansible Blockinfile Module/'><span class="task-number">Task 088</span><div class="task-title">Ansible Blockinfile Module</div></a></div>
+        <div class='task'><a href='Task-89- Ansible Manage Services/'><span class="task-number">Task 089</span><div class="task-title">Ansible Manage Services</div></a></div>
+        <div class='task'><a href='Task-90-Managing ACLs Using Ansible/'><span class="task-number">Task 090</span><div class="task-title">Managing ACLs Using Ansible</div></a></div>
+        <div class='task'><a href='Task-91-Ansible Lineinfile Module/'><span class="task-number">Task 091</span><div class="task-title">Ansible Lineinfile Module</div></a></div>
+        <div class='task'><a href='Task-92-Managing Jinja2 Templates Using Ansible/'><span class="task-number">Task 092</span><div class="task-title">Managing Jinja2 Templates Using Ansible</div></a></div>
+        <div class='task'><a href='Task-93-Using Ansible Conditionals/'><span class="task-number">Task 093</span><div class="task-title">Using Ansible Conditionals</div></a></div>
+      </div>
     </div>
 
-    <div class="category-section">
-      <div class="category-title">Ansible Configuration Management (Tasks 82-93)</div>
-      <div class="grid" id="ansible-tasks"></div>
-    </div>
-
-    <div class="category-section">
-      <div class="category-title">Terraform Infrastructure as Code (Tasks 94-100)</div>
-      <div class="grid" id="terraform-tasks"></div>
+    <!-- Terraform Infrastructure as Code -->
+    <div class="category-section terraform">
+      <div class="category-title">🏗️ Terraform Infrastructure as Code (Tasks 94-100)</div>
+      <div class="grid">
+        <div class='task'><a href='Task-94-Create VPC Using Terraform/'><span class="task-number">Task 094</span><div class="task-title">Create VPC Using Terraform</div></a></div>
+        <div class='task'><a href='Task-95-Create Security Group Using Terraform/'><span class="task-number">Task 095</span><div class="task-title">Create Security Group Using Terraform</div></a></div>
+        <div class='task'><a href='Task-96-Create EC2 Instance Using Terraform/'><span class="task-number">Task 096</span><div class="task-title">Create EC2 Instance Using Terraform</div></a></div>
+        <div class='task'><a href='Task-97-Create IAM Policy Using Terraform/'><span class="task-number">Task 097</span><div class="task-title">Create IAM Policy Using Terraform</div></a></div>
+        <div class='task'><a href='Task-98-Launch EC2 in Private VPC Subnet Using Terraform/'><span class="task-number">Task 098</span><div class="task-title">Launch EC2 in Private VPC Subnet Using Terraform</div></a></div>
+        <div class='task'><a href='Task-99-Attach IAM Policy for DynamoDB Access Using Terraform/'><span class="task-number">Task 099</span><div class="task-title">Attach IAM Policy for DynamoDB Access Using Terraform</div></a></div>
+        <div class='task'><a href='Task-100-Create and Configure Alarm Using CloudWatch Using Terraform/'><span class="task-number">Task 100</span><div class="task-title">Create and Configure CloudWatch Alarm Using Terraform</div></a></div>
+      </div>
     </div>
   </div>
 
-  <div id="readmeModal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 class="modal-title" id="modal-title">Loading...</h2>
-        <span class="close">&times;</span>
-      </div>
-      <div class="modal-body">
-        <div id="modal-body" class="readme-content">
-          <div class="loading">
-            <div class="loading-spinner"></div>
-            Loading content...
-          </div>
-        </div>
+  <footer>
+    <div class="footer-content">
+      <p><strong>© 2025 Mohammed Abdullah</strong></p>
+      <p>100 Days of DevOps Challenge with KodeKloud</p>
+      <div class="social-links">
+        <a href="https://kodekloud.com/100-days-of-devops" target="_blank">KodeKloud</a>
+        <a href="https://github.com" target="_blank">GitHub</a>
+        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
       </div>
     </div>
-  </div>
+  </footer>
 
-  <script>
-    // Get GitHub username from URL
-    const getGitHubUsername = () => {
-      const hostname = window.location.hostname;
-      if (hostname.includes('github.io')) {
-        return hostname.split('.')[0];
-      }
-      return null;
-    };
-
-    // Build proper GitHub raw URL
-    const buildRawUrl = (folder, filename) => {
-      const username = getGitHubUsername();
-      if (username) {
-        // GitHub stores folders with spaces as-is, but we need to encode them properly for URLs
-        // Replace spaces with %20 for proper URL encoding
-        const encodedFolder = folder.replace(/ /g, '%20');
-        return `https://raw.githubusercontent.com/${username}/100-Days-Of-DevOps-KodeKloud-Solutions-Explanation/main/${encodedFolder}/${filename}`;
-      }
-      return `${folder}/${filename}`;
-    };
-
-    // Task data structure
-    const tasks = {
-      linux: [
-        'Task-01- Linux User Setup with Non-Interactive Shell',
-        'Task-02-Temporary User Setup with Expiry',
-        'Task-03-Secure Root SSH Access',
-        'Task-04-Script Execution Permission',
-        'Task-05-SElinux Installation and Configuration',
-        'Task-06-Create a Cron Job',
-        'Task-07- Linux SSH Authentication',
-        'Task-08-Install Ansible Via Pip',
-        'Task-09-MariaDB Troubleshooting',
-        'Task-10-Linux Bash Scripts',
-        'Task-11-Install and Configure Tomcat Server',
-        'Task-12-Linux Network Services',
-        'Task-13- IPtables Installation And Configuration',
-        'Task-14- Linux Process Troubleshooting',
-        'Task-15-Setup SSL for Nginx',
-        'Task-16-Install and Configure Nginx as an LBR',
-        'Task-17-Install and Configure PostgreSQL',
-        'Task-18-Configure LAMP server',
-        'Task-19-Install and Configure Web Application',
-        'Task-20-Configure Nginx + PHP-FPM Using Unix Sock'
-      ],
-      git: [
-        'Task-21- Set Up Git Repository on Storage Server',
-        'Task-22-Clone Git Repository on Storage Server',
-        'Task-23-Fork a Git Repository',
-        'Task-24-Git Create Branches',
-        'Task-25-Git Merge Branches',
-        'Task-26-Git Manage Remotes',
-        'Task-27-Git Revert Some Changes',
-        'Task-28- Git Cherry Pick',
-        'Task-29-Manage Git Pull Requests',
-        'Task-30-Git hard reset',
-        'Task-31-Git Stash',
-        'Task-32-Git Rebase',
-        'Task-33-Resolve Git Merge Conflicts',
-        'Task-34-Git Hook'
-      ],
-      docker: [
-        'Task-35-Install Docker Packages and Start Docker Service Start',
-        'Task-36-Deploy Nginx Container on Application Server',
-        'Task-37-Copy File to Docker Container',
-        'Task-38-Pull Docker Images copy',
-        'Task-39- Create a Docker Image From Container',
-        'Task-40-Docker EXEC Operations',
-        'Task-41-Create Docker File',
-        'Task-42- Create a Docker Network',
-        'Task-43-Docker Ports Mapping',
-        'Task-44- Write a Docker Compose File',
-        'Task-45- Resolve Dockerfile Issues',
-        'Task-46-Deploy App Container',
-        'Task-47-Docker Python App'
-      ],
-      kubernetes: [
-        'Task-48-Deploy Pods in Kubernetes Cluster',
-        'Task-49-Deploy Applications with Kubernetes Deployments',
-        'Task-50-Set Resource Limits in Kubernetes Pods',
-        'Task-51-Execute Rolling Updates in Kubernetes',
-        'Task-52-Revert Deployment to Previous Version in Kubernetes',
-        'Task-53-Resolve VolumeMounts Issue in Kubernetes',
-        'Task-54-Kubernetes Shared Volumes',
-        'Task-55-Kubernetes Sidecar Containers',
-        'Task-56-Deploy Nginx Web Server on Kubernetes Cluster',
-        'Task-57-Print Environment Variables',
-        'Task-58-Deploy Grafana on Kubernetes Cluster',
-        'Task-59-Troubleshoot Deployment issues in Kubernetes',
-        'Task-60-Persistent Volumes in Kubernetes',
-        'Task-61- Init Containers in Kubernetes',
-        'Task-62- Manage Secrets in Kubernetes',
-        'Task-63-Deploy Iron Gallery App on Kubernetes',
-        'Task-64-Fix Python App Deployed on Kubernetes Cluster',
-        'Task-65-Deploy Redis Deployment on Kubernetes',
-        'Task-66- Deploy MySQL on Kubernetes',
-        'Task-67- Deploy Guest Book App on Kubernetes'
-      ],
-      jenkins: [
-        'Task-68-Set Up Jenkins Server',
-        'Task-69-Install Jenkins Plugins',
-        'Task-70-Configure Jenkins User Access',
-        'Task-71-Configure Jenkins Job for Package Installation',
-        'Task-72-Jenkins Parameterized Builds',
-        'Task-73- Jenkins Scheduled Jobs',
-        'Task-74-Jenkins Database Backup Job',
-        'Task-75- Jenkins Slave Nodes',
-        'Task-76-Jenkins Project Security',
-        'Task-77-Jenkins Deploy Pipeline',
-        'Task-78-Jenkins Conditional Pipeline',
-        'Task-79-Jenkins Deployment Job',
-        'Task-80-Jenkins Chained Builds',
-        'Task-81-Jenkins Multistage Pipeline'
-      ],
-      ansible: [
-        'Task-82-Create Ansible Inventory for App Server Testing',
-        'Task-83-Troubleshoot and Create Ansible Playbook',
-        'Task-84-Copy Data to App Servers using Ansible',
-        'Task-85-Create Files on App Servers using Ansible',
-        'Task-86-Ansible Ping Module Usage',
-        'Task-87-Ansible Install Package',
-        'Task-88- Ansible Blockinfile Module',
-        'Task-89- Ansible Manage Services',
-        'Task-90-Managing ACLs Using Ansible',
-        'Task-91-Ansible Lineinfile Module',
-        'Task-92-Managing Jinja2 Templates Using Ansible',
-        'Task-93-Using Ansible Conditionals'
-      ],
-      terraform: [
-        'Task-94-Create VPC Using Terraform',
-        'Task-95-Create Security Group Using Terraform',
-        'Task-96-Create EC2 Instance Using Terraform',
-        'Task-97-Create IAM Policy Using Terraform',
-        'Task-98-Launch EC2 in Private VPC Subnet Using Terraform',
-        'Task-99-Attach IAM Policy for DynamoDB Access Using Terraform',
-        'Task-100-Create and Configure Alarm Using CloudWatch Using Terraform'
-      ]
-    };
-
-    // Render tasks
-    Object.keys(tasks).forEach(category => {
-      const container = document.getElementById(`${category}-tasks`);
-      tasks[category].forEach((folder, index) => {
-        const taskNum = folder.match(/\d+/)[0];
-        const title = folder.replace(/Task-\d+-?\s*/, '').trim();
-        
-        const taskDiv = document.createElement('div');
-        taskDiv.className = 'task';
-        taskDiv.dataset.folder = folder;
-        taskDiv.innerHTML = `
-          <span class="task-number">Task ${taskNum.padStart(3, '0')}</span>
-          <div class="task-title">${title}</div>
-        `;
-        container.appendChild(taskDiv);
-      });
-    });
-
-    // Modal functionality
-    const modal = document.getElementById('readmeModal');
-    const modalTitle = document.getElementById('modal-title');
-    const modalBody = document.getElementById('modal-body');
-    const closeBtn = document.querySelector('.close');
-
-    // Simple markdown to HTML
-    const renderMarkdown = (md) => {
-      // First, handle code blocks (before other processing)
-      md = md.replace(/```([\s\S]*?)```/gim, (match, code) => {
-        return `<pre><code>${code.trim()}</code></pre>`;
-      });
-
-      // Split into lines for processing
-      const lines = md.split('\n');
-      const html = [];
-      let inList = false;
-      let listItems = [];
-
-      for (let i = 0; i < lines.length; i++) {
-        let line = lines[i];
-
-        // Skip empty lines
-        if (line.trim() === '') {
-          if (inList) {
-            html.push('<ul>' + listItems.join('') + '</ul>');
-            listItems = [];
-            inList = false;
-          }
-          continue;
-        }
-
-        // Headers
-        if (line.match(/^### /)) {
-          if (inList) {
-            html.push('<ul>' + listItems.join('') + '</ul>');
-            listItems = [];
-            inList = false;
-          }
-          html.push('<h3>' + line.replace(/^### /, '') + '</h3>');
-          continue;
-        }
-        if (line.match(/^## /)) {
-          if (inList) {
-            html.push('<ul>' + listItems.join('') + '</ul>');
-            listItems = [];
-            inList = false;
-          }
-          html.push('<h2>' + line.replace(/^## /, '') + '</h2>');
-          continue;
-        }
-        if (line.match(/^# /)) {
-          if (inList) {
-            html.push('<ul>' + listItems.join('') + '</ul>');
-            listItems = [];
-            inList = false;
-          }
-          html.push('<h1>' + line.replace(/^# /, '') + '</h1>');
-          continue;
-        }
-
-        // Code blocks (already processed)
-        if (line.includes('<pre><code>')) {
-          if (inList) {
-            html.push('<ul>' + listItems.join('') + '</ul>');
-            listItems = [];
-            inList = false;
-          }
-          html.push(line);
-          continue;
-        }
-
-        // Lists
-        if (line.match(/^\s*[-*+]\s+/) || line.match(/^\s*\d+\.\s+/)) {
-          const content = line.replace(/^\s*[-*+\d.]+\s+/, '');
-          listItems.push('<li>' + processInline(content) + '</li>');
-          inList = true;
-          continue;
-        }
-
-        // Regular paragraphs
-        if (inList) {
-          html.push('<ul>' + listItems.join('') + '</ul>');
-          listItems = [];
-          inList = false;
-        }
-        html.push('<p>' + processInline(line) + '</p>');
-      }
-
-      // Close any remaining list
-      if (inList) {
-        html.push('<ul>' + listItems.join('') + '</ul>');
-      }
-
-      return html.join('\n');
-    };
-
-    // Process inline markdown (bold, italic, links, images, code)
-    const processInline = (text) => {
-      // Images (before links!)
-      text = text.replace(/!\[([^\]]*)\]\(([^\)]+)\)/g, '<img src="$2" alt="$1" />');
-      
-      // Links
-      text = text.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
-      
-      // Inline code
-      text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
-      
-      // Bold
-      text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-      
-      // Italic
-      text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
-      
-      return text;
-    };
-
-    // Load task content
-    const loadTask = async (folder) => {
-      modal.style.display = 'block';
-      modalTitle.textContent = folder.replace(/Task-\d+-?\s*/, '').trim();
-      modalBody.innerHTML = '<div class="loading"><div class="loading-spinner"></div>Loading...</div>';
-
-      try {
-        const readmeUrl = buildRawUrl(folder, 'README.md');
-        const response = await fetch(readmeUrl);
-        
-        if (!response.ok) {
-          throw new Error(`README.md not found at ${readmeUrl}`);
-        }
-
-        let content = await response.text();
-        let html = renderMarkdown(content);
-        
-        // Fix image paths in the rendered HTML
-        html = html.replace(/<img src="(?!http)([^"]+)"/g, (match, src) => {
-          const imgUrl = buildRawUrl(folder, src);
-          return `<img src="${imgUrl}"`;
-        });
-
-        modalBody.innerHTML = html;
-      } catch (error) {
-        modalBody.innerHTML = `
-          <div class="error-message">
-            <strong>Error:</strong> ${error.message}
-          </div>
-        `;
-      }
-    };
-
-    // Event listeners
-    document.querySelectorAll('.task').forEach(task => {
-      task.addEventListener('click', () => {
-        loadTask(task.dataset.folder);
-      });
-    });
-
-    closeBtn.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        modal.style.display = 'none';
-      }
-    });
-  </script>
 </body>
 </html>
