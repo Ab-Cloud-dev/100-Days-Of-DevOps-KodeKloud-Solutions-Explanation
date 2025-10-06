@@ -538,24 +538,113 @@
 
     // Simple markdown to HTML
     const renderMarkdown = (md) => {
-      return md
-        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-        .replace(/```([^`]+)```/gim, '<pre><code>$1</code></pre>')
-        .replace(/`([^`]+)`/gim, '<code>$1</code>')
-        .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
-        .replace(/\*(.*?)\*/gim, '<em>$1</em>')
-        .replace(/!\[([^\]]*)\]\(([^\)]+)\)/gim, (match, alt, src) => {
-          return `<img src="${src}" alt="${alt}" />`;
-        })
-        .replace(/\[([^\]]+)\]\(([^\)]+)\)/gim, '<a href="$2" target="_blank">$1</a>')
-        .replace(/\n\n/gim, '</p><p>')
-        .replace(/^(?!<)/gim, '<p>')
-        .replace(/$/gim, '</p>')
-        .replace(/<p><\/p>/gim, '')
-        .replace(/<p>(<[h|pre|code])/gim, '$1')
-        .replace(/(<\/[h|pre|code][^>]*>)<\/p>/gim, '$1');
+      // First, handle code blocks (before other processing)
+      md = md.replace(/```([\s\S]*?)```/gim, (match, code) => {
+        return `<pre><code>${code.trim()}</code></pre>`;
+      });
+
+      // Split into lines for processing
+      const lines = md.split('\n');
+      const html = [];
+      let inList = false;
+      let listItems = [];
+
+      for (let i = 0; i < lines.length; i++) {
+        let line = lines[i];
+
+        // Skip empty lines
+        if (line.trim() === '') {
+          if (inList) {
+            html.push('<ul>' + listItems.join('') + '</ul>');
+            listItems = [];
+            inList = false;
+          }
+          continue;
+        }
+
+        // Headers
+        if (line.match(/^### /)) {
+          if (inList) {
+            html.push('<ul>' + listItems.join('') + '</ul>');
+            listItems = [];
+            inList = false;
+          }
+          html.push('<h3>' + line.replace(/^### /, '') + '</h3>');
+          continue;
+        }
+        if (line.match(/^## /)) {
+          if (inList) {
+            html.push('<ul>' + listItems.join('') + '</ul>');
+            listItems = [];
+            inList = false;
+          }
+          html.push('<h2>' + line.replace(/^## /, '') + '</h2>');
+          continue;
+        }
+        if (line.match(/^# /)) {
+          if (inList) {
+            html.push('<ul>' + listItems.join('') + '</ul>');
+            listItems = [];
+            inList = false;
+          }
+          html.push('<h1>' + line.replace(/^# /, '') + '</h1>');
+          continue;
+        }
+
+        // Code blocks (already processed)
+        if (line.includes('<pre><code>')) {
+          if (inList) {
+            html.push('<ul>' + listItems.join('') + '</ul>');
+            listItems = [];
+            inList = false;
+          }
+          html.push(line);
+          continue;
+        }
+
+        // Lists
+        if (line.match(/^\s*[-*+]\s+/) || line.match(/^\s*\d+\.\s+/)) {
+          const content = line.replace(/^\s*[-*+\d.]+\s+/, '');
+          listItems.push('<li>' + processInline(content) + '</li>');
+          inList = true;
+          continue;
+        }
+
+        // Regular paragraphs
+        if (inList) {
+          html.push('<ul>' + listItems.join('') + '</ul>');
+          listItems = [];
+          inList = false;
+        }
+        html.push('<p>' + processInline(line) + '</p>');
+      }
+
+      // Close any remaining list
+      if (inList) {
+        html.push('<ul>' + listItems.join('') + '</ul>');
+      }
+
+      return html.join('\n');
+    };
+
+    // Process inline markdown (bold, italic, links, images, code)
+    const processInline = (text) => {
+      // Images (before links!)
+      text = text.replace(/!\[([^\]]*)\]\(([^\)]+)\)/g, '<img src="$2" alt="$1" />');
+      
+      // Links
+      text = text.replace(/\[([^\]]+)\]\(([^\)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+      
+      // Inline code
+      text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+      
+      // Bold
+      text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      
+      // Italic
+      text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
+      
+      return text;
     };
 
     // Load task content
