@@ -68,57 +68,6 @@
       margin-bottom: 1.5rem;
     }
 
-    h3 {
-      font-size: 1.3rem;
-      font-weight: 500;
-    }
-
-    p, li {
-      color: #374151;
-      margin-bottom: 1rem;
-    }
-
-    ul, ol {
-      margin-left: 2rem;
-      margin-bottom: 1.5rem;
-    }
-
-    li {
-      margin-bottom: 0.5rem;
-    }
-
-    code {
-      background: #f3f4f6;
-      padding: 0.3rem 0.6rem;
-      border-radius: 6px;
-      font-family: "Fira Code", Consolas, monospace;
-      font-size: 0.9rem;
-      color: #dc2626;
-    }
-
-    a {
-      color: #2563eb;
-      text-decoration: none;
-      transition: color 0.2s ease;
-    }
-
-    a:hover {
-      color: #1d4ed8;
-      text-decoration: underline;
-    }
-
-    .highlight-box {
-      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-      border-left: 4px solid #f59e0b;
-      padding: 1.5rem;
-      border-radius: 10px;
-      margin: 2rem 0;
-    }
-
-    .highlight-box strong {
-      color: #92400e;
-    }
-
     .stats-section {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -139,19 +88,6 @@
       font-size: 2.5rem;
       font-weight: 700;
       display: block;
-    }
-
-    .stat-label {
-      font-size: 0.9rem;
-      opacity: 0.9;
-      margin-top: 0.5rem;
-    }
-
-    .section-divider {
-      margin: 4rem 0;
-      border: none;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #e5e7eb, transparent);
     }
 
     .task-index-header {
@@ -190,40 +126,13 @@
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease;
       border-left: 4px solid #e5e7eb;
-      position: relative;
-      overflow: hidden;
       cursor: pointer;
-    }
-
-    .task::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(147, 51, 234, 0.05) 100%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
     }
 
     .task:hover {
       transform: translateY(-5px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
       border-left-color: #3b82f6;
-    }
-
-    .task:hover::before {
-      opacity: 1;
-    }
-
-    .task:hover .preview-overlay {
-      opacity: 1;
-    }
-
-    .task-content {
-      position: relative;
-      z-index: 1;
     }
 
     .task-number {
@@ -240,55 +149,6 @@
       line-height: 1.4;
     }
 
-    .task-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 0.75rem;
-      font-size: 0.8rem;
-      color: #6b7280;
-    }
-
-    .task-badges {
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    .badge {
-      background: #f3f4f6;
-      color: #374151;
-      padding: 0.2rem 0.5rem;
-      border-radius: 12px;
-      font-size: 0.7rem;
-      font-weight: 500;
-    }
-
-    .preview-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(59, 130, 246, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      border-radius: 15px;
-      z-index: 2;
-    }
-
-    .preview-text {
-      background: rgba(59, 130, 246, 0.9);
-      color: white;
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-
-    /* Modal styles */
     .modal {
       display: none;
       position: fixed;
@@ -310,7 +170,6 @@
       max-width: 900px;
       max-height: 90vh;
       overflow: hidden;
-      position: relative;
       box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     }
 
@@ -338,8 +197,7 @@
       transition: opacity 0.2s ease;
     }
 
-    .close:hover,
-    .close:focus {
+    .close:hover {
       opacity: 1;
     }
 
@@ -367,20 +225,13 @@
       padding-bottom: 0.5rem;
     }
 
-    .readme-content h2 {
-      font-size: 1.5rem;
-    }
-
-    .readme-content h3 {
-      font-size: 1.2rem;
-    }
-
     .readme-content img {
       max-width: 100%;
       height: auto;
       border-radius: 8px;
       margin: 1.5rem 0;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      cursor: pointer;
     }
 
     .readme-content pre {
@@ -405,22 +256,6 @@
       padding: 0;
     }
 
-    .readme-content blockquote {
-      border-left: 4px solid #3b82f6;
-      margin: 1.5rem 0;
-      padding: 1rem 1.5rem;
-      background: #f8f9fa;
-      border-radius: 0 8px 8px 0;
-    }
-
-    .readme-content ul, .readme-content ol {
-      margin: 1rem 0 1rem 2rem;
-    }
-
-    .readme-content li {
-      margin-bottom: 0.5rem;
-    }
-
     .loading {
       text-align: center;
       padding: 3rem;
@@ -442,27 +277,6 @@
       100% { transform: rotate(360deg); }
     }
 
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin: 2rem 0;
-    }
-
-    .gallery img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: transform 0.2s ease;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-
-    .gallery img:hover {
-      transform: scale(1.05);
-    }
-
     .error-message {
       background: #fef2f2;
       border: 1px solid #fecaca;
@@ -472,106 +286,24 @@
       margin: 1rem 0;
     }
 
-    .no-content {
-      text-align: center;
-      padding: 2rem;
-      color: #6b7280;
-      font-style: italic;
-    }
-
-    /* Category-specific colors */
-    .linux .task { border-left-color: #10b981; }
-    .linux .task:hover::before { background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%); }
-
-    .git .task { border-left-color: #f59e0b; }
-    .git .task:hover::before { background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.1) 100%); }
-
-    .docker .task { border-left-color: #3b82f6; }
-    .docker .task:hover::before { background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.1) 100%); }
-
-    .kubernetes .task { border-left-color: #8b5cf6; }
-    .kubernetes .task:hover::before { background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(124, 58, 237, 0.1) 100%); }
-
-    .jenkins .task { border-left-color: #ef4444; }
-    .jenkins .task:hover::before { background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.1) 100%); }
-
-    .ansible .task { border-left-color: #ec4899; }
-    .ansible .task:hover::before { background: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(219, 39, 119, 0.1) 100%); }
-
-    .terraform .task { border-left-color: #06b6d4; }
-    .terraform .task:hover::before { background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(8, 145, 178, 0.1) 100%); }
-
-    footer {
-      background: #1f2937;
-      color: white;
-      text-align: center;
-      padding: 2rem;
-      margin-top: 4rem;
-    }
-
-    .footer-content {
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .social-links {
-      margin-top: 1rem;
-    }
-
-    .social-links a {
-      color: #9ca3af;
-      margin: 0 1rem;
-      transition: color 0.2s ease;
-    }
-
-    .social-links a:hover {
-      color: white;
-    }
-
     @media (max-width: 768px) {
       .hero-section h1 {
         font-size: 2rem;
       }
-
-      .hero-section {
-        padding: 3rem 1rem;
-      }
-
       .content {
         padding: 2rem;
         margin: 0 1rem 2rem 1rem;
       }
-
-      .container {
-        padding: 0 1rem;
-      }
-
       .grid {
         grid-template-columns: 1fr;
-      }
-
-      .modal-content {
-        margin: 1rem;
-        width: calc(100% - 2rem);
-      }
-
-      .modal-body {
-        padding: 1rem;
-      }
-
-      .task-meta {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
       }
     }
   </style>
 </head>
 <body>
-
   <div class="hero-section">
-    <h1>🚀 100 Days of DevOps</h1>
-    <p class="subtitle">KodeKloud Solutions & Explanations - A comprehensive journey through DevOps tools, concepts and best practices</p>
+    <h1>100 Days of DevOps</h1>
+    <p class="subtitle">KodeKloud Solutions & Explanations</p>
   </div>
 
   <div class="container">
@@ -579,1609 +311,53 @@
       <div class="stats-section">
         <div class="stat-card">
           <span class="stat-number">100</span>
-          <div class="stat-label">Days Completed</div>
+          <div>Days Completed</div>
         </div>
         <div class="stat-card">
           <span class="stat-number">7</span>
-          <div class="stat-label">Technologies</div>
-        </div>
-        <div class="stat-card">
-          <span class="stat-number">∞</span>
-          <div class="stat-label">Learning</div>
-        </div>
-      </div>
-
-      <h2>🎯 What is this</h2>
-      <p>A personal / community challenge to learn DevOps tools, concepts and best practices over 100 days. Built around the <a href="https://kodekloud.com/100-days-of-devops" target="_blank">100 Days of DevOps</a> track from KodeKloud.</p>
-
-      <ul>
-        <li><strong>Purpose:</strong> To build up hands-on experience in DevOps through small, daily tasks.</li>
-        <li><strong>Source:</strong> Based on the <a href="https://kodekloud.com/100-days-of-devops" target="_blank">100 Days of DevOps</a> track from KodeKloud.</li>
-        <li><strong>Goal:</strong> By the end of Day 100, I want to have a portfolio of real DevOps workflows, tools, scripts, etc., plus explanations of how they are used in professional settings.</li>
-      </ul>
-
-      <h3>📁 Each Task Contains:</h3>
-      <ol>
-        <li>The problem/task statement or link</li>
-        <li>My solution (scripts, config, code, manifests, etc.)</li>
-        <li>Notes / reflections, including how the task connects to real-world usage</li>
-      </ol>
-
-      <hr class="section-divider">
-
-      <h2>📝 Documentation Approach</h2>
-      <ol>
-        <li><strong>Task description</strong> — what was asked</li>
-        <li><strong>Solution</strong> — code / scripts / configs</li>
-        <li><strong>Explanation / Walkthrough</strong> — step-by-step what I did and why</li>
-      </ol>
-
-      <div class="highlight-box">
-        <strong>⚠️ Important Note:</strong> While using the solution from this repo, change the folder/service names as per your own setup since the underlying task remains the same.
-      </div>
-
-      <h2>🤝 Contributions & Feedback</h2>
-      <ul>
-        <li>If you see something I can improve, feel free to open a Pull Request.</li>
-        <li>If there are typos, mistakes, or better ways to do a task, I welcome suggestions.</li>
-        <li>⭐ Star the repo if you find this useful or want to track the progress.</li>
-      </ul>
-    </div>
-
-    <h2 class="task-index-header">📚 Complete Task Index</h2>
-
-    <!-- Linux & System Administration -->
-    <div class="category-section linux">
-      <div class="category-title">🐧 Linux & System Administration (Tasks 1-20)</div>
-      <div class="grid">
-        <div class='task' data-folder='Task-01- Linux User Setup with Non-Interactive Shell'>
-          <div class="task-content">
-            <span class="task-number">Task 001</span>
-            <div class="task-title">Linux User Setup with Non-Interactive Shell</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-                <span class="badge">🖼️ Images</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-02-Temporary User Setup with Expiry'>
-          <div class="task-content">
-            <span class="task-number">Task 002</span>
-            <div class="task-title">Temporary User Setup with Expiry</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-03-Secure Root SSH Access'>
-          <div class="task-content">
-            <span class="task-number">Task 003</span>
-            <div class="task-title">Secure Root SSH Access</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-04-Script Execution Permission'>
-          <div class="task-content">
-            <span class="task-number">Task 004</span>
-            <div class="task-title">Script Execution Permission</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-05-SElinux Installation and Configuration'>
-          <div class="task-content">
-            <span class="task-number">Task 005</span>
-            <div class="task-title">SELinux Installation and Configuration</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-06-Create a Cron Job'>
-          <div class="task-content">
-            <span class="task-number">Task 006</span>
-            <div class="task-title">Create a Cron Job</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-07- Linux SSH Authentication'>
-          <div class="task-content">
-            <span class="task-number">Task 007</span>
-            <div class="task-title">Linux SSH Authentication</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-08-Install Ansible Via Pip'>
-          <div class="task-content">
-            <span class="task-number">Task 008</span>
-            <div class="task-title">Install Ansible Via Pip</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-09-MariaDB Troubleshooting'>
-          <div class="task-content">
-            <span class="task-number">Task 009</span>
-            <div class="task-title">MariaDB Troubleshooting</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-10-Linux Bash Scripts'>
-          <div class="task-content">
-            <span class="task-number">Task 010</span>
-            <div class="task-title">Linux Bash Scripts</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-11-Install and Configure Tomcat Server'>
-          <div class="task-content">
-            <span class="task-number">Task 011</span>
-            <div class="task-title">Install and Configure Tomcat Server</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-12-Linux Network Services'>
-          <div class="task-content">
-            <span class="task-number">Task 012</span>
-            <div class="task-title">Linux Network Services</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-13- IPtables Installation And Configuration'>
-          <div class="task-content">
-            <span class="task-number">Task 013</span>
-            <div class="task-title">IPtables Installation And Configuration</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-14- Linux Process Troubleshooting'>
-          <div class="task-content">
-            <span class="task-number">Task 014</span>
-            <div class="task-title">Linux Process Troubleshooting</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-15-Setup SSL for Nginx'>
-          <div class="task-content">
-            <span class="task-number">Task 015</span>
-            <div class="task-title">Setup SSL for Nginx</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-16-Install and Configure Nginx as an LBR'>
-          <div class="task-content">
-            <span class="task-number">Task 016</span>
-            <div class="task-title">Install and Configure Nginx as Load Balancer</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-17-Install and Configure PostgreSQL'>
-          <div class="task-content">
-            <span class="task-number">Task 017</span>
-            <div class="task-title">Install and Configure PostgreSQL</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-18-Configure LAMP server'>
-          <div class="task-content">
-            <span class="task-number">Task 018</span>
-            <div class="task-title">Configure LAMP Server</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-19-Install and Configure Web Application'>
-          <div class="task-content">
-            <span class="task-number">Task 019</span>
-            <div class="task-title">Install and Configure Web Application</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-20-Configure Nginx + PHP-FPM Using Unix Sock'>
-          <div class="task-content">
-            <span class="task-number">Task 020</span>
-            <div class="task-title">Configure Nginx + PHP-FPM Using Unix Socket</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
+          <div>Technologies</div>
         </div>
       </div>
     </div>
 
-    <!-- Git Version Control -->
-    <div class="category-section git">
-      <div class="category-title">📋 Git Version Control (Tasks 21-34)</div>
-      <div class="grid">
-        <div class='task' data-folder='Task-21- Set Up Git Repository on Storage Server'>
-          <div class="task-content">
-            <span class="task-number">Task 021</span>
-            <div class="task-title">Set Up Git Repository on Storage Server</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-22-Clone Git Repository on Storage Server'>
-          <div class="task-content">
-            <span class="task-number">Task 022</span>
-            <div class="task-title">Clone Git Repository on Storage Server</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-23-Fork a Git Repository'>
-          <div class="task-content">
-            <span class="task-number">Task 023</span>
-            <div class="task-title">Fork a Git Repository</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-24-Git Create Branches'>
-          <div class="task-content">
-            <span class="task-number">Task 024</span>
-            <div class="task-title">Git Create Branches</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-25-Git Merge Branches'>
-          <div class="task-content">
-            <span class="task-number">Task 025</span>
-            <div class="task-title">Git Merge Branches</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-26-Git Manage Remotes'>
-          <div class="task-content">
-            <span class="task-number">Task 026</span>
-            <div class="task-title">Git Manage Remotes</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-27-Git Revert Some Changes'>
-          <div class="task-content">
-            <span class="task-number">Task 027</span>
-            <div class="task-title">Git Revert Some Changes</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-28- Git Cherry Pick'>
-          <div class="task-content">
-            <span class="task-number">Task 028</span>
-            <div class="task-title">Git Cherry Pick</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-29-Manage Git Pull Requests'>
-          <div class="task-content">
-            <span class="task-number">Task 029</span>
-            <div class="task-title">Manage Git Pull Requests</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-30-Git hard reset'>
-          <div class="task-content">
-            <span class="task-number">Task 030</span>
-            <div class="task-title">Git Hard Reset</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-31-Git Stash'>
-          <div class="task-content">
-            <span class="task-number">Task 031</span>
-            <div class="task-title">Git Stash</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-32-Git Rebase'>
-          <div class="task-content">
-            <span class="task-number">Task 032</span>
-            <div class="task-title">Git Rebase</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-33-Resolve Git Merge Conflicts'>
-          <div class="task-content">
-            <span class="task-number">Task 033</span>
-            <div class="task-title">Resolve Git Merge Conflicts</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-34-Git Hook'>
-          <div class="task-content">
-            <span class="task-number">Task 034</span>
-            <div class="task-title">Git Hooks</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-      </div>
+    <h2 class="task-index-header">Complete Task Index</h2>
+
+    <div class="category-section">
+      <div class="category-title">Linux & System Administration (Tasks 1-20)</div>
+      <div class="grid" id="linux-tasks"></div>
     </div>
 
-    <!-- Docker Containerization -->
-    <div class="category-section docker">
-      <div class="category-title">🐳 Docker Containerization (Tasks 35-47)</div>
-      <div class="grid">
-        <div class='task' data-folder='Task-35-Install Docker Packages and Start Docker Service Start'>
-          <div class="task-content">
-            <span class="task-number">Task 035</span>
-            <div class="task-title">Install Docker Packages and Start Service</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-36-Deploy Nginx Container on Application Server'>
-          <div class="task-content">
-            <span class="task-number">Task 036</span>
-            <div class="task-title">Deploy Nginx Container on Application Server</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-37-Copy File to Docker Container'>
-          <div class="task-content">
-            <span class="task-number">Task 037</span>
-            <div class="task-title">Copy File to Docker Container</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-38-Pull Docker Images copy'>
-          <div class="task-content">
-            <span class="task-number">Task 038</span>
-            <div class="task-title">Pull Docker Images</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-39- Create a Docker Image From Container'>
-          <div class="task-content">
-            <span class="task-number">Task 039</span>
-            <div class="task-title">Create a Docker Image From Container</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-40-Docker EXEC Operations'>
-          <div class="task-content">
-            <span class="task-number">Task 040</span>
-            <div class="task-title">Docker EXEC Operations</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-41-Create Docker File'>
-          <div class="task-content">
-            <span class="task-number">Task 041</span>
-            <div class="task-title">Create Docker File</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-42- Create a Docker Network'>
-          <div class="task-content">
-            <span class="task-number">Task 042</span>
-            <div class="task-title">Create a Docker Network</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-43-Docker Ports Mapping'>
-          <div class="task-content">
-            <span class="task-number">Task 043</span>
-            <div class="task-title">Docker Ports Mapping</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-44- Write a Docker Compose File'>
-          <div class="task-content">
-            <span class="task-number">Task 044</span>
-            <div class="task-title">Write a Docker Compose File</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-45- Resolve Dockerfile Issues'>
-          <div class="task-content">
-            <span class="task-number">Task 045</span>
-            <div class="task-title">Resolve Dockerfile Issues</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-46-Deploy App Container'>
-          <div class="task-content">
-            <span class="task-number">Task 046</span>
-            <div class="task-title">Deploy App Container</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-47-Docker Python App'>
-          <div class="task-content">
-            <span class="task-number">Task 047</span>
-            <div class="task-title">Docker Python App</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-      </div>
+    <div class="category-section">
+      <div class="category-title">Git Version Control (Tasks 21-34)</div>
+      <div class="grid" id="git-tasks"></div>
     </div>
 
-    <!-- Kubernetes Orchestration -->
-    <div class="category-section kubernetes">
-      <div class="category-title">☸️ Kubernetes Orchestration (Tasks 48-67)</div>
-      <div class="grid">
-        <div class='task' data-folder='Task-48-Deploy Pods in Kubernetes Cluster'>
-          <div class="task-content">
-            <span class="task-number">Task 048</span>
-            <div class="task-title">Deploy Pods in Kubernetes Cluster</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-49-Deploy Applications with Kubernetes Deployments'>
-          <div class="task-content">
-            <span class="task-number">Task 049</span>
-            <div class="task-title">Deploy Applications with Kubernetes Deployments</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-50-Set Resource Limits in Kubernetes Pods'>
-          <div class="task-content">
-            <span class="task-number">Task 050</span>
-            <div class="task-title">Set Resource Limits in Kubernetes Pods</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-51-Execute Rolling Updates in Kubernetes'>
-          <div class="task-content">
-            <span class="task-number">Task 051</span>
-            <div class="task-title">Execute Rolling Updates in Kubernetes</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-52-Revert Deployment to Previous Version in Kubernetes'>
-          <div class="task-content">
-            <span class="task-number">Task 052</span>
-            <div class="task-title">Revert Deployment to Previous Version</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-53-Resolve VolumeMounts Issue in Kubernetes'>
-          <div class="task-content">
-            <span class="task-number">Task 053</span>
-            <div class="task-title">Resolve VolumeMounts Issue in Kubernetes</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-54-Kubernetes Shared Volumes'>
-          <div class="task-content">
-            <span class="task-number">Task 054</span>
-            <div class="task-title">Kubernetes Shared Volumes</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-55-Kubernetes Sidecar Containers'>
-          <div class="task-content">
-            <span class="task-number">Task 055</span>
-            <div class="task-title">Kubernetes Sidecar Containers</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-56-Deploy Nginx Web Server on Kubernetes Cluster'>
-          <div class="task-content">
-            <span class="task-number">Task 056</span>
-            <div class="task-title">Deploy Nginx Web Server on Kubernetes</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-57-Print Environment Variables'>
-          <div class="task-content">
-            <span class="task-number">Task 057</span>
-            <div class="task-title">Print Environment Variables</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-58-Deploy Grafana on Kubernetes Cluster'>
-          <div class="task-content">
-            <span class="task-number">Task 058</span>
-            <div class="task-title">Deploy Grafana on Kubernetes Cluster</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-59-Troubleshoot Deployment issues in Kubernetes'>
-          <div class="task-content">
-            <span class="task-number">Task 059</span>
-            <div class="task-title">Troubleshoot Deployment Issues in Kubernetes</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-60-Persistent Volumes in Kubernetes'>
-          <div class="task-content">
-            <span class="task-number">Task 060</span>
-            <div class="task-title">Persistent Volumes in Kubernetes</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-61- Init Containers in Kubernetes'>
-          <div class="task-content">
-            <span class="task-number">Task 061</span>
-            <div class="task-title">Init Containers in Kubernetes</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-62- Manage Secrets in Kubernetes'>
-          <div class="task-content">
-            <span class="task-number">Task 062</span>
-            <div class="task-title">Manage Secrets in Kubernetes</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-63-Deploy Iron Gallery App on Kubernetes'>
-          <div class="task-content">
-            <span class="task-number">Task 063</span>
-            <div class="task-title">Deploy Iron Gallery App on Kubernetes</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-64-Fix Python App Deployed on Kubernetes Cluster'>
-          <div class="task-content">
-            <span class="task-number">Task 064</span>
-            <div class="task-title">Fix Python App Deployed on Kubernetes</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-65-Deploy Redis Deployment on Kubernetes'>
-          <div class="task-content">
-            <span class="task-number">Task 065</span>
-            <div class="task-title">Deploy Redis Deployment on Kubernetes</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-66- Deploy MySQL on Kubernetes'>
-          <div class="task-content">
-            <span class="task-number">Task 066</span>
-            <div class="task-title">Deploy MySQL on Kubernetes</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-67- Deploy Guest Book App on Kubernetes'>
-          <div class="task-content">
-            <span class="task-number">Task 067</span>
-            <div class="task-title">Deploy Guest Book App on Kubernetes</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-      </div>
+    <div class="category-section">
+      <div class="category-title">Docker Containerization (Tasks 35-47)</div>
+      <div class="grid" id="docker-tasks"></div>
     </div>
 
-    <!-- Jenkins CI/CD -->
-    <div class="category-section jenkins">
-      <div class="category-title">🔧 Jenkins CI/CD (Tasks 68-81)</div>
-      <div class="grid">
-        <div class='task' data-folder='Task-68-Set Up Jenkins Server'>
-          <div class="task-content">
-            <span class="task-number">Task 068</span>
-            <div class="task-title">Set Up Jenkins Server</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-69-Install Jenkins Plugins'>
-          <div class="task-content">
-            <span class="task-number">Task 069</span>
-            <div class="task-title">Install Jenkins Plugins</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-70-Configure Jenkins User Access'>
-          <div class="task-content">
-            <span class="task-number">Task 070</span>
-            <div class="task-title">Configure Jenkins User Access</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-71-Configure Jenkins Job for Package Installation'>
-          <div class="task-content">
-            <span class="task-number">Task 071</span>
-            <div class="task-title">Configure Jenkins Job for Package Installation</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-72-Jenkins Parameterized Builds'>
-          <div class="task-content">
-            <span class="task-number">Task 072</span>
-            <div class="task-title">Jenkins Parameterized Builds</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-73- Jenkins Scheduled Jobs'>
-          <div class="task-content">
-            <span class="task-number">Task 073</span>
-            <div class="task-title">Jenkins Scheduled Jobs</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-74-Jenkins Database Backup Job'>
-          <div class="task-content">
-            <span class="task-number">Task 074</span>
-            <div class="task-title">Jenkins Database Backup Job</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-75- Jenkins Slave Nodes'>
-          <div class="task-content">
-            <span class="task-number">Task 075</span>
-            <div class="task-title">Jenkins Slave Nodes</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-76-Jenkins Project Security'>
-          <div class="task-content">
-            <span class="task-number">Task 076</span>
-            <div class="task-title">Jenkins Project Security</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-77-Jenkins Deploy Pipeline'>
-          <div class="task-content">
-            <span class="task-number">Task 077</span>
-            <div class="task-title">Jenkins Deploy Pipeline</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-78-Jenkins Conditional Pipeline'>
-          <div class="task-content">
-            <span class="task-number">Task 078</span>
-            <div class="task-title">Jenkins Conditional Pipeline</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-79-Jenkins Deployment Job'>
-          <div class="task-content">
-            <span class="task-number">Task 079</span>
-            <div class="task-title">Jenkins Deployment Job</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-80-Jenkins Chained Builds'>
-          <div class="task-content">
-            <span class="task-number">Task 080</span>
-            <div class="task-title">Jenkins Chained Builds</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-81-Jenkins Multistage Pipeline'>
-          <div class="task-content">
-            <span class="task-number">Task 081</span>
-            <div class="task-title">Jenkins Multistage Pipeline</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-      </div>
+    <div class="category-section">
+      <div class="category-title">Kubernetes Orchestration (Tasks 48-67)</div>
+      <div class="grid" id="kubernetes-tasks"></div>
     </div>
 
-    <!-- Ansible Configuration Management -->
-    <div class="category-section ansible">
-      <div class="category-title">🔮 Ansible Configuration Management (Tasks 82-93)</div>
-      <div class="grid">
-        <div class='task' data-folder='Task-82-Create Ansible Inventory for App Server Testing'>
-          <div class="task-content">
-            <span class="task-number">Task 082</span>
-            <div class="task-title">Create Ansible Inventory for App Server Testing</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-83-Troubleshoot and Create Ansible Playbook'>
-          <div class="task-content">
-            <span class="task-number">Task 083</span>
-            <div class="task-title">Troubleshoot and Create Ansible Playbook</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-84-Copy Data to App Servers using Ansible'>
-          <div class="task-content">
-            <span class="task-number">Task 084</span>
-            <div class="task-title">Copy Data to App Servers using Ansible</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-85-Create Files on App Servers using Ansible'>
-          <div class="task-content">
-            <span class="task-number">Task 085</span>
-            <div class="task-title">Create Files on App Servers using Ansible</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-86-Ansible Ping Module Usage'>
-          <div class="task-content">
-            <span class="task-number">Task 086</span>
-            <div class="task-title">Ansible Ping Module Usage</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-87-Ansible Install Package'>
-          <div class="task-content">
-            <span class="task-number">Task 087</span>
-            <div class="task-title">Ansible Install Package</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-88- Ansible Blockinfile Module'>
-          <div class="task-content">
-            <span class="task-number">Task 088</span>
-            <div class="task-title">Ansible Blockinfile Module</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-89- Ansible Manage Services'>
-          <div class="task-content">
-            <span class="task-number">Task 089</span>
-            <div class="task-title">Ansible Manage Services</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-90-Managing ACLs Using Ansible'>
-          <div class="task-content">
-            <span class="task-number">Task 090</span>
-            <div class="task-title">Managing ACLs Using Ansible</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-91-Ansible Lineinfile Module'>
-          <div class="task-content">
-            <span class="task-number">Task 091</span>
-            <div class="task-title">Ansible Lineinfile Module</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-92-Managing Jinja2 Templates Using Ansible'>
-          <div class="task-content">
-            <span class="task-number">Task 092</span>
-            <div class="task-title">Managing Jinja2 Templates Using Ansible</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-93-Using Ansible Conditionals'>
-          <div class="task-content">
-            <span class="task-number">Task 093</span>
-            <div class="task-title">Using Ansible Conditionals</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-      </div>
+    <div class="category-section">
+      <div class="category-title">Jenkins CI/CD (Tasks 68-81)</div>
+      <div class="grid" id="jenkins-tasks"></div>
     </div>
 
-    <!-- Terraform Infrastructure as Code -->
-    <div class="category-section terraform">
-      <div class="category-title">🏗️ Terraform Infrastructure as Code (Tasks 94-100)</div>
-      <div class="grid">
-        <div class='task' data-folder='Task-94-Create VPC Using Terraform'>
-          <div class="task-content">
-            <span class="task-number">Task 094</span>
-            <div class="task-title">Create VPC Using Terraform</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-95-Create Security Group Using Terraform'>
-          <div class="task-content">
-            <span class="task-number">Task 095</span>
-            <div class="task-title">Create Security Group Using Terraform</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-96-Create EC2 Instance Using Terraform'>
-          <div class="task-content">
-            <span class="task-number">Task 096</span>
-            <div class="task-title">Create EC2 Instance Using Terraform</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-97-Create IAM Policy Using Terraform'>
-          <div class="task-content">
-            <span class="task-number">Task 097</span>
-            <div class="task-title">Create IAM Policy Using Terraform</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-98-Launch EC2 in Private VPC Subnet Using Terraform'>
-          <div class="task-content">
-            <span class="task-number">Task 098</span>
-            <div class="task-title">Launch EC2 in Private VPC Subnet Using Terraform</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-99-Attach IAM Policy for DynamoDB Access Using Terraform'>
-          <div class="task-content">
-            <span class="task-number">Task 099</span>
-            <div class="task-title">Attach IAM Policy for DynamoDB Access Using Terraform</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-        <div class='task' data-folder='Task-100-Create and Configure Alarm Using CloudWatch Using Terraform'>
-          <div class="task-content">
-            <span class="task-number">Task 100</span>
-            <div class="task-title">Create and Configure CloudWatch Alarm Using Terraform</div>
-            <div class="task-meta">
-              <div class="task-badges">
-                <span class="badge">📄 README</span>
-              </div>
-              <span>👁️ Preview</span>
-            </div>
-          </div>
-          <div class="preview-overlay">
-            <span class="preview-text">Click to preview README</span>
-          </div>
-        </div>
-      </div>
+    <div class="category-section">
+      <div class="category-title">Ansible Configuration Management (Tasks 82-93)</div>
+      <div class="grid" id="ansible-tasks"></div>
+    </div>
+
+    <div class="category-section">
+      <div class="category-title">Terraform Infrastructure as Code (Tasks 94-100)</div>
+      <div class="grid" id="terraform-tasks"></div>
     </div>
   </div>
 
-  <!-- Modal for README preview -->
   <div id="readmeModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -2192,226 +368,251 @@
         <div id="modal-body" class="readme-content">
           <div class="loading">
             <div class="loading-spinner"></div>
-            Loading README content...
+            Loading content...
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <footer>
-    <div class="footer-content">
-      <p><strong>© 2025 Mohammed Abdullah</strong></p>
-      <p>100 Days of DevOps Challenge with KodeKloud</p>
-      <div class="social-links">
-        <a href="https://kodekloud.com/100-days-of-devops" target="_blank">KodeKloud</a>
-        <a href="https://github.com" target="_blank">GitHub</a>
-        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
-      </div>
-    </div>
-  </footer>
-
   <script>
-    class TaskRenderer {
-      constructor() {
-        this.modal = document.getElementById('readmeModal');
-        this.modalTitle = document.getElementById('modal-title');
-        this.modalBody = document.getElementById('modal-body');
-        this.closeBtn = document.querySelector('.close');
-
-        // Configuration for different environments
-        this.config = {
-          // For GitHub Pages deployment
-          isGitHubPages: window.location.hostname.includes('github.io'),
-          repoName: '100-Days-Of-DevOps-KodeKloud-Solutions-Explanation',
-          branch: 'main' // or 'master' depending on your default branch
-        };
-
-        this.initEventListeners();
+    // Get GitHub username from URL
+    const getGitHubUsername = () => {
+      const hostname = window.location.hostname;
+      if (hostname.includes('github.io')) {
+        return hostname.split('.')[0];
       }
+      return null;
+    };
 
-      initEventListeners() {
-        // Task preview clicks
-        document.querySelectorAll('.task').forEach(task => {
-          task.addEventListener('click', (e) => {
-            e.preventDefault();
-            const folder = task.dataset.folder;
-            if (folder) {
-              this.loadTaskContent(folder);
-            }
-          });
-        });
-
-        // Modal close
-        this.closeBtn.addEventListener('click', () => {
-          this.modal.style.display = 'none';
-        });
-
-        window.addEventListener('click', (e) => {
-          if (e.target === this.modal) {
-            this.modal.style.display = 'none';
-          }
-        });
-
-        // ESC key to close modal
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && this.modal.style.display === 'block') {
-            this.modal.style.display = 'none';
-          }
-        });
+    // Build proper GitHub raw URL
+    const buildRawUrl = (folder, filename) => {
+      const username = getGitHubUsername();
+      if (username) {
+        return `https://raw.githubusercontent.com/${username}/100-Days-Of-DevOps-KodeKloud-Solutions-Explanation/main/${encodeURIComponent(folder)}/${filename}`;
       }
+      return `${folder}/${filename}`;
+    };
 
-      getFileUrl(folder, filename) {
-        if (this.config.isGitHubPages) {
-          // Use GitHub raw content URL for GitHub Pages
-          const username = window.location.pathname.split('/')[1]; // Extract username from URL
-          return `https://raw.githubusercontent.com/${username}/${this.config.repoName}/${this.config.branch}/${folder}/${filename}`;
-        } else {
-          // Use relative path for local development
-          return `${folder}/${filename}`;
+    // Task data structure
+    const tasks = {
+      linux: [
+        'Task-01- Linux User Setup with Non-Interactive Shell',
+        'Task-02-Temporary User Setup with Expiry',
+        'Task-03-Secure Root SSH Access',
+        'Task-04-Script Execution Permission',
+        'Task-05-SElinux Installation and Configuration',
+        'Task-06-Create a Cron Job',
+        'Task-07- Linux SSH Authentication',
+        'Task-08-Install Ansible Via Pip',
+        'Task-09-MariaDB Troubleshooting',
+        'Task-10-Linux Bash Scripts',
+        'Task-11-Install and Configure Tomcat Server',
+        'Task-12-Linux Network Services',
+        'Task-13- IPtables Installation And Configuration',
+        'Task-14- Linux Process Troubleshooting',
+        'Task-15-Setup SSL for Nginx',
+        'Task-16-Install and Configure Nginx as an LBR',
+        'Task-17-Install and Configure PostgreSQL',
+        'Task-18-Configure LAMP server',
+        'Task-19-Install and Configure Web Application',
+        'Task-20-Configure Nginx + PHP-FPM Using Unix Sock'
+      ],
+      git: [
+        'Task-21- Set Up Git Repository on Storage Server',
+        'Task-22-Clone Git Repository on Storage Server',
+        'Task-23-Fork a Git Repository',
+        'Task-24-Git Create Branches',
+        'Task-25-Git Merge Branches',
+        'Task-26-Git Manage Remotes',
+        'Task-27-Git Revert Some Changes',
+        'Task-28- Git Cherry Pick',
+        'Task-29-Manage Git Pull Requests',
+        'Task-30-Git hard reset',
+        'Task-31-Git Stash',
+        'Task-32-Git Rebase',
+        'Task-33-Resolve Git Merge Conflicts',
+        'Task-34-Git Hook'
+      ],
+      docker: [
+        'Task-35-Install Docker Packages and Start Docker Service Start',
+        'Task-36-Deploy Nginx Container on Application Server',
+        'Task-37-Copy File to Docker Container',
+        'Task-38-Pull Docker Images copy',
+        'Task-39- Create a Docker Image From Container',
+        'Task-40-Docker EXEC Operations',
+        'Task-41-Create Docker File',
+        'Task-42- Create a Docker Network',
+        'Task-43-Docker Ports Mapping',
+        'Task-44- Write a Docker Compose File',
+        'Task-45- Resolve Dockerfile Issues',
+        'Task-46-Deploy App Container',
+        'Task-47-Docker Python App'
+      ],
+      kubernetes: [
+        'Task-48-Deploy Pods in Kubernetes Cluster',
+        'Task-49-Deploy Applications with Kubernetes Deployments',
+        'Task-50-Set Resource Limits in Kubernetes Pods',
+        'Task-51-Execute Rolling Updates in Kubernetes',
+        'Task-52-Revert Deployment to Previous Version in Kubernetes',
+        'Task-53-Resolve VolumeMounts Issue in Kubernetes',
+        'Task-54-Kubernetes Shared Volumes',
+        'Task-55-Kubernetes Sidecar Containers',
+        'Task-56-Deploy Nginx Web Server on Kubernetes Cluster',
+        'Task-57-Print Environment Variables',
+        'Task-58-Deploy Grafana on Kubernetes Cluster',
+        'Task-59-Troubleshoot Deployment issues in Kubernetes',
+        'Task-60-Persistent Volumes in Kubernetes',
+        'Task-61- Init Containers in Kubernetes',
+        'Task-62- Manage Secrets in Kubernetes',
+        'Task-63-Deploy Iron Gallery App on Kubernetes',
+        'Task-64-Fix Python App Deployed on Kubernetes Cluster',
+        'Task-65-Deploy Redis Deployment on Kubernetes',
+        'Task-66- Deploy MySQL on Kubernetes',
+        'Task-67- Deploy Guest Book App on Kubernetes'
+      ],
+      jenkins: [
+        'Task-68-Set Up Jenkins Server',
+        'Task-69-Install Jenkins Plugins',
+        'Task-70-Configure Jenkins User Access',
+        'Task-71-Configure Jenkins Job for Package Installation',
+        'Task-72-Jenkins Parameterized Builds',
+        'Task-73- Jenkins Scheduled Jobs',
+        'Task-74-Jenkins Database Backup Job',
+        'Task-75- Jenkins Slave Nodes',
+        'Task-76-Jenkins Project Security',
+        'Task-77-Jenkins Deploy Pipeline',
+        'Task-78-Jenkins Conditional Pipeline',
+        'Task-79-Jenkins Deployment Job',
+        'Task-80-Jenkins Chained Builds',
+        'Task-81-Jenkins Multistage Pipeline'
+      ],
+      ansible: [
+        'Task-82-Create Ansible Inventory for App Server Testing',
+        'Task-83-Troubleshoot and Create Ansible Playbook',
+        'Task-84-Copy Data to App Servers using Ansible',
+        'Task-85-Create Files on App Servers using Ansible',
+        'Task-86-Ansible Ping Module Usage',
+        'Task-87-Ansible Install Package',
+        'Task-88- Ansible Blockinfile Module',
+        'Task-89- Ansible Manage Services',
+        'Task-90-Managing ACLs Using Ansible',
+        'Task-91-Ansible Lineinfile Module',
+        'Task-92-Managing Jinja2 Templates Using Ansible',
+        'Task-93-Using Ansible Conditionals'
+      ],
+      terraform: [
+        'Task-94-Create VPC Using Terraform',
+        'Task-95-Create Security Group Using Terraform',
+        'Task-96-Create EC2 Instance Using Terraform',
+        'Task-97-Create IAM Policy Using Terraform',
+        'Task-98-Launch EC2 in Private VPC Subnet Using Terraform',
+        'Task-99-Attach IAM Policy for DynamoDB Access Using Terraform',
+        'Task-100-Create and Configure Alarm Using CloudWatch Using Terraform'
+      ]
+    };
+
+    // Render tasks
+    Object.keys(tasks).forEach(category => {
+      const container = document.getElementById(`${category}-tasks`);
+      tasks[category].forEach((folder, index) => {
+        const taskNum = folder.match(/\d+/)[0];
+        const title = folder.replace(/Task-\d+-?\s*/, '').trim();
+        
+        const taskDiv = document.createElement('div');
+        taskDiv.className = 'task';
+        taskDiv.dataset.folder = folder;
+        taskDiv.innerHTML = `
+          <span class="task-number">Task ${taskNum.padStart(3, '0')}</span>
+          <div class="task-title">${title}</div>
+        `;
+        container.appendChild(taskDiv);
+      });
+    });
+
+    // Modal functionality
+    const modal = document.getElementById('readmeModal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalBody = document.getElementById('modal-body');
+    const closeBtn = document.querySelector('.close');
+
+    // Simple markdown to HTML
+    const renderMarkdown = (md) => {
+      return md
+        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+        .replace(/```([^`]+)```/gim, '<pre><code>$1</code></pre>')
+        .replace(/`([^`]+)`/gim, '<code>$1</code>')
+        .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/gim, '<em>$1</em>')
+        .replace(/!\[([^\]]*)\]\(([^\)]+)\)/gim, (match, alt, src) => {
+          return `<img src="${src}" alt="${alt}" />`;
+        })
+        .replace(/\[([^\]]+)\]\(([^\)]+)\)/gim, '<a href="$2" target="_blank">$1</a>')
+        .replace(/\n\n/gim, '</p><p>')
+        .replace(/^(?!<)/gim, '<p>')
+        .replace(/$/gim, '</p>')
+        .replace(/<p><\/p>/gim, '')
+        .replace(/<p>(<[h|pre|code])/gim, '$1')
+        .replace(/(<\/[h|pre|code][^>]*>)<\/p>/gim, '$1');
+    };
+
+    // Load task content
+    const loadTask = async (folder) => {
+      modal.style.display = 'block';
+      modalTitle.textContent = folder.replace(/Task-\d+-?\s*/, '').trim();
+      modalBody.innerHTML = '<div class="loading"><div class="loading-spinner"></div>Loading...</div>';
+
+      try {
+        const readmeUrl = buildRawUrl(folder, 'README.md');
+        const response = await fetch(readmeUrl);
+        
+        if (!response.ok) {
+          throw new Error(`README.md not found at ${readmeUrl}`);
         }
-      }
 
-      async loadTaskContent(folder) {
-        this.modal.style.display = 'block';
-        this.modalTitle.textContent = this.formatTaskTitle(folder);
-        this.modalBody.innerHTML = `
-          <div class="loading">
-            <div class="loading-spinner"></div>
-            Loading README content...
+        let content = await response.text();
+        let html = renderMarkdown(content);
+        
+        // Fix image paths in the rendered HTML
+        html = html.replace(/<img src="(?!http)([^"]+)"/g, (match, src) => {
+          const imgUrl = buildRawUrl(folder, src);
+          return `<img src="${imgUrl}"`;
+        });
+
+        modalBody.innerHTML = html;
+      } catch (error) {
+        modalBody.innerHTML = `
+          <div class="error-message">
+            <strong>Error:</strong> ${error.message}
           </div>
         `;
-
-        try {
-          // Try to load README.md
-          const readmeUrl = this.getFileUrl(folder, 'README.md');
-          const readmeResponse = await fetch(readmeUrl);
-          let content = '';
-
-          if (readmeResponse.ok) {
-            const readmeText = await readmeResponse.text();
-            content = this.renderMarkdown(readmeText);
-          } else {
-            content = `
-              <div class="no-content">
-                📄 README.md not found for this task.
-                <br><small>Trying to load: ${readmeUrl}</small>
-              </div>
-            `;
-          }
-
-          // Try to load common images
-          const images = await this.loadTaskImages(folder);
-          if (images.length > 0) {
-            content += '<h3>📸 Task Images & Screenshots</h3>';
-            content += '<div class="gallery">';
-            images.forEach(img => {
-              const imgUrl = this.getFileUrl(folder, img);
-              content += `<img src="${imgUrl}" alt="${img}" onclick="this.style.position='fixed'; this.style.top='50%'; this.style.left='50%'; this.style.transform='translate(-50%, -50%) scale(1.5)'; this.style.zIndex='9999'; this.style.backgroundColor='rgba(0,0,0,0.9)'; this.style.padding='20px'; this.onclick=function(){this.style.position=''; this.style.top=''; this.style.left=''; this.style.transform=''; this.style.zIndex=''; this.style.backgroundColor=''; this.style.padding=''; this.onclick=null;}" />`;
-            });
-            content += '</div>';
-          }
-
-          this.modalBody.innerHTML = content;
-        } catch (error) {
-          this.modalBody.innerHTML = `
-            <div class="error-message">
-              <strong>Error loading content:</strong> ${error.message}
-              <br><small>Make sure you're running this through a web server (not file://) or deployed to GitHub Pages.</small>
-            </div>
-          `;
-        }
       }
+    };
 
-      formatTaskTitle(folder) {
-        return folder
-          .replace(/Task-\d+-?\s*/, '')
-          .replace(/\//g, '')
-          .trim();
+    // Event listeners
+    document.querySelectorAll('.task').forEach(task => {
+      task.addEventListener('click', () => {
+        loadTask(task.dataset.folder);
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
       }
+    });
 
-      async loadTaskImages(folder) {
-        // Common image names to check
-        const commonImages = [
-          'image.png', 'image.jpg', 'image.jpeg', 'image.gif',
-          'screenshot.png', 'screenshot.jpg', 'screenshot.jpeg',
-          'demo.gif', 'demo.png', 'demo.jpg',
-          'result.png', 'result.jpg', 'result.jpeg',
-          'solution.png', 'solution.jpg', 'solution.jpeg',
-          'step1.png', 'step2.png', 'step3.png',
-          'before.png', 'after.png',
-          'terminal.png', 'output.png',
-          'config.png', 'setup.png'
-        ];
-
-        const validImages = [];
-
-        for (const img of commonImages) {
-          try {
-            const imgUrl = this.getFileUrl(folder, img);
-            const response = await fetch(imgUrl, { method: 'HEAD' });
-            if (response.ok) {
-              validImages.push(img);
-            }
-          } catch (error) {
-            // Image doesn't exist, continue
-          }
-        }
-
-        return validImages;
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        modal.style.display = 'none';
       }
-
-      renderMarkdown(markdown) {
-        // Enhanced markdown to HTML conversion
-        return markdown
-          // Headers
-          .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-          .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-          .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-
-          // Code blocks
-          .replace(/```([\s\S]*?)```/gim, '<pre><code>$1</code></pre>')
-          .replace(/`([^`]+)`/gim, '<code>$1</code>')
-
-          // Bold and italic
-          .replace(/\*\*(.*?)\*\*/gim, '<strong>$1</strong>')
-          .replace(/\*(.*?)\*/gim, '<em>$1</em>')
-
-          // Links and images
-          .replace(/!\[([^\]]*)\]\(([^\)]+)\)/gim, '<img src="$2" alt="$1" />')
-          .replace(/\[([^\]]+)\]\(([^\)]+)\)/gim, '<a href="$2" target="_blank">$1</a>')
-
-          // Blockquotes
-          .replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>')
-
-          // Lists
-          .replace(/^\s*[-*+]\s+(.+)$/gim, '<li>$1</li>')
-          .replace(/^\s*\d+\.\s+(.+)$/gim, '<li>$1</li>')
-
-          // Line breaks and paragraphs
-          .replace(/\n\n/gim, '</p><p>')
-          .replace(/^(?!<[h|l|p|b])/gim, '<p>')
-          .replace(/$/gim, '</p>')
-
-          // Clean up
-          .replace(/<p><\/p>/gim, '')
-          .replace(/<p>(<h[1-6]>)/gim, '$1')
-          .replace(/(<\/h[1-6]>)<\/p>/gim, '$1')
-          .replace(/<p>(<li>)/gim, '<ul>$1')
-          .replace(/(<\/li>)<\/p>/gim, '$1</ul>')
-          .replace(/<\/ul>\s*<ul>/gim, '')
-          .replace(/<p>(<pre>)/gim, '$1')
-          .replace(/(<\/pre>)<\/p>/gim, '$1')
-          .replace(/<p>(<blockquote>)/gim, '$1')
-          .replace(/(<\/blockquote>)<\/p>/gim, '$1');
-      }
-    }
-
-    // Initialize when DOM is loaded
-    document.addEventListener('DOMContentLoaded', () => {
-      new TaskRenderer();
     });
   </script>
-
 </body>
 </html>
