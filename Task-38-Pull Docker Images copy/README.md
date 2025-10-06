@@ -29,7 +29,7 @@ busybox      musl      44f1048931f5   11 months ago   1.46MB
 
 ```
 
-![alt text](image.png)
+
 
 
 ## Retag the Docker Image.
